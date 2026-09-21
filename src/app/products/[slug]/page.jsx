@@ -57,14 +57,14 @@ export default function ProductDetailPage({ params }) {
           </div>
 
           {/* Product Detail Main Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-4 mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mt-2 mb-16 sm:mb-20">
             
             {/* Left Detail Gallery */}
-            <div className="lg:col-span-6 bg-[#F4F8FC] border border-slate-200 rounded-3xl p-10 flex items-center justify-center min-h-[480px] sticky top-28">
+            <div className="lg:col-span-6 bg-[#F4F8FC] border border-slate-200 rounded-3xl p-6 sm:p-10 flex items-center justify-center min-h-[300px] sm:min-h-[480px] lg:sticky lg:top-28">
               <img
                 src={product.image}
                 alt={product.name}
-                className="max-h-[420px] max-w-full object-contain hover:scale-105 transition-transform duration-500"
+                className="max-h-[280px] sm:max-h-[420px] max-w-full object-contain hover:scale-105 transition-transform duration-500"
                 onError={(e) => {
                   e.currentTarget.src = "https://spacevisionlabs.com/images/pp-lab-bench-4.jpg";
                 }}
@@ -73,20 +73,20 @@ export default function ProductDetailPage({ params }) {
 
             {/* Right Details & Specs */}
             <div className="lg:col-span-6 flex flex-col">
-              <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 border border-blue-100 font-mono text-xs font-bold uppercase tracking-wider rounded-md mb-4 self-start">
+              <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 border border-blue-100 font-mono text-xs font-bold uppercase tracking-wider rounded-md mb-3 self-start">
                 {product.category}
               </span>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#040C1A] tracking-tight leading-tight mb-4">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#040C1A] tracking-tight leading-tight mb-4">
                 {product.name}
               </h1>
 
-              <p className="text-base text-slate-600 leading-relaxed mb-8">
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6 sm:mb-8">
                 {product.description}
               </p>
 
               {/* Technical Specifications Card */}
-              <div className="bg-[#F4F8FC] border border-slate-200 rounded-2xl p-6 mb-8">
+              <div className="bg-[#F4F8FC] border border-slate-200 rounded-2xl p-5 sm:p-6 mb-6 sm:mb-8">
                 <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-2">
                   Technical Specifications
                 </div>
@@ -96,10 +96,10 @@ export default function ProductDetailPage({ params }) {
               </div>
 
               {/* Actions */}
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button
                   onClick={() => handleOpenQuote(product.name)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-xl text-xs transition-all shadow-md flex items-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-xl text-xs transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer text-center"
                 >
                   <span>Request Quotation</span>
                   <i className="fa-solid fa-paper-plane text-xs"></i>
@@ -109,7 +109,7 @@ export default function ProductDetailPage({ params }) {
                   href={`https://wa.me/918193856070?text=Hi%20Space%20Vision%20Lab,%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-6 py-3.5 rounded-xl text-xs transition-all shadow-md flex items-center gap-2"
+                  className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-6 py-3.5 rounded-xl text-xs transition-all shadow-md flex items-center justify-center gap-2 text-center"
                 >
                   <i className="fa-brands fa-whatsapp text-sm"></i>
                   <span>Talk to Specialist</span>

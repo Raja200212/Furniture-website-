@@ -15,8 +15,11 @@ export default function ProductsPage() {
   const [selectedSectors, setSelectedSectors] = useState([]);
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [sortOption, setSortOption] = useState("default");
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteSubject, setQuoteSubject] = useState("");
+
+  const activeFilterCount = selectedCategories.length + selectedSectors.length + selectedMaterials.length;
 
   useEffect(() => {
     // Ensure FontAwesome icons if needed
@@ -165,16 +168,18 @@ export default function ProductsPage() {
           {/* Catalogue Layout Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            {/* Filter Sidebar (290px equivalent) */}
-            <aside className="lg:col-span-4 xl:col-span-3 bg-white border border-slate-200 rounded-2xl p-6 shadow-xs sticky top-28 space-y-6">
+            {/* Desktop Filter Sidebar (Hidden on Mobile) */}
+            <aside className="hidden lg:block lg:col-span-4 xl:col-span-3 bg-white border border-slate-200 rounded-2xl p-6 shadow-xs sticky top-28 space-y-6">
               <div className="flex items-center justify-between pb-4 border-b border-slate-200">
                 <h3 className="font-extrabold text-base text-[#040C1A]">Filter Products</h3>
-                <button
-                  onClick={resetAllFilters}
-                  className="text-xs font-mono font-bold text-blue-600 hover:text-blue-800 cursor-pointer"
-                >
-                  Reset All
-                </button>
+                {activeFilterCount > 0 && (
+                  <button
+                    onClick={resetAllFilters}
+                    className="text-xs font-mono font-bold text-blue-600 hover:text-blue-800 cursor-pointer"
+                  >
+                    Reset All
+                  </button>
+                )}
               </div>
 
               {/* Group 1: Primary Category */}
@@ -260,54 +265,74 @@ export default function ProductsPage() {
             </aside>
 
             {/* Products Grid Area */}
-            <main className="lg:col-span-8 xl:col-span-9 space-y-6">
+            <main className="lg:col-span-8 xl:col-span-9 space-y-5 sm:space-y-6 w-full">
               
               {/* Catalogue Toolbar */}
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row gap-4 items-center justify-between">
+              <div className="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col gap-3">
                 
-                {/* Search Input Box */}
-                <div className="relative w-full md:max-w-md">
-                  <i className="fa-solid fa-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 text-xs"></i>
-                  <input
-                    type="text"
-                    placeholder="Instant product search by keyword..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2.5 bg-[#F4F8FC] border border-slate-200 rounded-xl text-xs outline-none focus:bg-white focus:border-blue-500 transition-all"
-                  />
-                  {searchQuery && (
-                    <button
-                      onClick={() => setSearchQuery("")}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-600"
-                    >
-                      Clear
-                    </button>
-                  )}
+                {/* Search Bar & Mobile Filter Trigger */}
+                <div className="flex items-center gap-2.5">
+                  <div className="relative flex-1">
+                    <i className="fa-solid fa-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 text-xs"></i>
+                    <input
+                      type="text"
+                      placeholder="Search 148+ laboratory products..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-9 pr-8 py-2.5 bg-[#F4F8FC] border border-slate-200 rounded-xl text-xs outline-none focus:bg-white focus:border-blue-500 transition-all text-[#040C1A] placeholder:text-slate-400"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery("")}
+                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-600 p-1"
+                        aria-label="Clear Search"
+                      >
+                        <i className="fa-solid fa-xmark"></i>
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Mobile Filter Button */}
+                  <button
+                    onClick={() => setMobileFilterOpen(true)}
+                    className="lg:hidden flex items-center gap-1.5 px-3.5 py-2.5 bg-[#040C1A] text-white rounded-xl text-xs font-bold shrink-0 hover:bg-blue-600 transition-colors shadow-xs"
+                    aria-label="Open Filters"
+                  >
+                    <i className="fa-solid fa-sliders text-[11px]"></i>
+                    <span>Filters</span>
+                    {activeFilterCount > 0 && (
+                      <span className="w-5 h-5 rounded-full bg-blue-500 text-white text-[10px] font-mono flex items-center justify-center font-bold">
+                        {activeFilterCount}
+                      </span>
+                    )}
+                  </button>
                 </div>
 
                 {/* Toolbar Meta & Sort */}
-                <div className="flex items-center gap-4 text-xs w-full md:w-auto justify-between md:justify-end">
-                  <span className="font-mono text-slate-500 font-bold">
+                <div className="flex items-center justify-between gap-3 text-xs pt-2 border-t border-slate-100">
+                  <span className="font-mono text-slate-500 font-bold text-[11px] sm:text-xs">
                     Showing <strong className="text-[#040C1A]">{filteredProducts.length}</strong> of {products.length} items
                   </span>
 
-                  <select
-                    value={sortOption}
-                    onChange={(e) => setSortOption(e.target.value)}
-                    className="py-2.5 px-3 bg-white border border-slate-200 rounded-xl font-bold text-[#040C1A] outline-none cursor-pointer text-xs"
-                  >
-                    <option value="default">Featured Sort</option>
-                    <option value="name-asc">Name (A - Z)</option>
-                    <option value="name-desc">Name (Z - A)</option>
-                    <option value="category">By Category</option>
-                  </select>
+                  <div className="flex items-center gap-2">
+                    <select
+                      value={sortOption}
+                      onChange={(e) => setSortOption(e.target.value)}
+                      className="py-1.5 px-3 bg-white border border-slate-200 rounded-xl font-bold text-[#040C1A] outline-none cursor-pointer text-xs"
+                    >
+                      <option value="default">Featured Sort</option>
+                      <option value="name-asc">Name (A - Z)</option>
+                      <option value="name-desc">Name (Z - A)</option>
+                      <option value="category">By Category</option>
+                    </select>
+                  </div>
                 </div>
 
               </div>
 
               {/* Main Products Grid */}
               {filteredProducts.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6">
                   {filteredProducts.map((product) => (
                     <Link
                       key={product.id}
@@ -315,8 +340,8 @@ export default function ProductsPage() {
                       className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl hover:border-blue-500 transition-all flex flex-col justify-between hover:-translate-y-1"
                     >
                       {/* Image Wrap with Category Tag */}
-                      <div className="relative h-56 w-full bg-white p-6 flex items-center justify-center border-b border-slate-100 overflow-hidden">
-                        <span className="absolute top-3 left-3 bg-[#F4F8FC] border border-slate-200 text-[#040C1A] text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded shadow-xs z-10">
+                      <div className="relative h-44 sm:h-56 w-full bg-[#FAFCFF] p-4 sm:p-6 flex items-center justify-center border-b border-slate-100 overflow-hidden">
+                        <span className="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-xs border border-slate-200 text-[#040C1A] text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded shadow-xs z-10">
                           {product.category}
                         </span>
 
@@ -332,20 +357,20 @@ export default function ProductsPage() {
                       </div>
 
                       {/* Product Card Body */}
-                      <div className="p-5 flex-1 flex flex-col justify-between">
+                      <div className="p-3.5 sm:p-5 flex-1 flex flex-col justify-between">
                         <div>
-                          <h4 className="text-sm font-extrabold text-[#040C1A] group-hover:text-blue-600 transition-colors line-clamp-1 mb-1.5">
+                          <h4 className="text-xs sm:text-sm font-extrabold text-[#040C1A] group-hover:text-blue-600 transition-colors line-clamp-1 mb-1">
                             {product.name}
                           </h4>
-                          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+                          <p className="text-[11px] sm:text-xs text-slate-500 line-clamp-2 leading-relaxed mb-3">
                             {product.description}
                           </p>
                         </div>
 
                         {/* Product Card Footer */}
-                        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-extrabold text-blue-600">
-                          <span className="group-hover:text-blue-700">View Details</span>
-                          <i className="fa-solid fa-arrow-right text-[11px] group-hover:translate-x-1 transition-transform"></i>
+                        <div className="pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-extrabold text-blue-600">
+                          <span className="group-hover:text-blue-700 text-[11px] sm:text-xs">View Specifications</span>
+                          <i className="fa-solid fa-arrow-right text-[10px] sm:text-[11px] group-hover:translate-x-1 transition-transform"></i>
                         </div>
                       </div>
                     </Link>
@@ -375,6 +400,147 @@ export default function ProductsPage() {
           </div>
         </div>
       </main>
+
+      {/* Mobile Filter Slide-Over Drawer */}
+      {mobileFilterOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex justify-end">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-200"
+            onClick={() => setMobileFilterOpen(false)}
+          />
+
+          {/* Drawer Container */}
+          <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-300">
+            
+            {/* Drawer Header */}
+            <div className="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-white sticky top-0 z-10">
+              <div className="flex items-center gap-2">
+                <h3 className="font-extrabold text-base text-[#040C1A]">Filter Products</h3>
+                {activeFilterCount > 0 && (
+                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                    {activeFilterCount} active
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-3">
+                {activeFilterCount > 0 && (
+                  <button
+                    onClick={resetAllFilters}
+                    className="text-xs font-mono font-bold text-blue-600 hover:text-blue-800"
+                  >
+                    Reset All
+                  </button>
+                )}
+                <button
+                  onClick={() => setMobileFilterOpen(false)}
+                  className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 cursor-pointer"
+                  aria-label="Close Filter Drawer"
+                >
+                  <i className="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+
+            {/* Drawer Scrollable Body */}
+            <div className="p-5 overflow-y-auto flex-1 space-y-6">
+              
+              {/* Group 1: Primary Category */}
+              <div>
+                <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-3">
+                  Primary Category
+                </div>
+                <ul className="space-y-2.5 text-xs">
+                  {categories.map((cat) => (
+                    <li key={cat}>
+                      <label className="flex items-center justify-between text-slate-700 hover:text-slate-950 cursor-pointer py-1">
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            checked={selectedCategories.includes(cat)}
+                            onChange={() => toggleCategory(cat)}
+                            className="w-4 h-4 rounded text-blue-600 accent-blue-600 cursor-pointer"
+                          />
+                          <span className="font-medium text-xs sm:text-sm">{cat}</span>
+                        </div>
+                        <span className="text-[11px] text-slate-400 font-mono">({categoryCounts[cat]})</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Group 2: Sector / Application */}
+              <div className="pt-4 border-t border-slate-100">
+                <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-3">
+                  Sector / Application
+                </div>
+                <ul className="space-y-2.5 text-xs">
+                  {[
+                    { id: "Education", label: "Education & STEAM" },
+                    { id: "University", label: "University Research" },
+                    { id: "Healthcare", label: "Hospital & Pathology" },
+                    { id: "Industrial", label: "Industrial QC / R&D" },
+                    { id: "Cleanroom", label: "Cleanroom Facility" }
+                  ].map((sec) => (
+                    <li key={sec.id}>
+                      <label className="flex items-center gap-3 text-slate-700 hover:text-slate-950 cursor-pointer py-1">
+                        <input
+                          type="checkbox"
+                          checked={selectedSectors.includes(sec.id)}
+                          onChange={() => toggleSector(sec.id)}
+                          className="w-4 h-4 rounded text-blue-600 accent-blue-600 cursor-pointer"
+                        />
+                        <span className="font-medium text-xs sm:text-sm">{sec.label}</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Group 3: Worktop & Material */}
+              <div className="pt-4 border-t border-slate-100">
+                <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-3">
+                  Worktop & Material
+                </div>
+                <ul className="space-y-2.5 text-xs">
+                  {[
+                    { id: "Steel", label: "All-Steel Frame" },
+                    { id: "Polypropylene", label: "Polypropylene (PP)" },
+                    { id: "Stainless", label: "Stainless Steel" },
+                    { id: "Resin", label: "Epoxy / Phenolic" }
+                  ].map((mat) => (
+                    <li key={mat.id}>
+                      <label className="flex items-center gap-3 text-slate-700 hover:text-slate-950 cursor-pointer py-1">
+                        <input
+                          type="checkbox"
+                          checked={selectedMaterials.includes(mat.id)}
+                          onChange={() => toggleMaterial(mat.id)}
+                          className="w-4 h-4 rounded text-blue-600 accent-blue-600 cursor-pointer"
+                        />
+                        <span className="font-medium text-xs sm:text-sm">{mat.label}</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+
+            {/* Drawer Bottom Sticky Action */}
+            <div className="p-4 border-t border-slate-200 bg-slate-50 sticky bottom-0 z-10 flex gap-3">
+              <button
+                onClick={() => setMobileFilterOpen(false)}
+                className="w-full bg-[#040C1A] hover:bg-blue-600 text-white font-bold py-3.5 px-4 rounded-xl text-xs transition-all shadow-md"
+              >
+                View {filteredProducts.length} Matching Products →
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
 
       <Footer onOpenQuote={() => handleOpenQuote()} />
       <WhatsAppFloat />

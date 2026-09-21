@@ -137,6 +137,7 @@ export default function SpaceVisionLab002Page() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteSubject, setQuoteSubject] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
@@ -473,7 +474,7 @@ export default function SpaceVisionLab002Page() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-                <aside className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-6">
+                <aside className="hidden lg:block bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-6">
                   <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                     <h3 className="font-bold text-sm text-[#0A1C38]">Filter Products</h3>
                     <button onClick={resetFilters} className="text-xs font-bold text-blue-600 hover:text-blue-800 cursor-pointer">Reset All</button>
@@ -506,8 +507,20 @@ export default function SpaceVisionLab002Page() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full sm:max-w-md px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:bg-white focus:border-blue-500"
                     />
-                    <div className="flex items-center gap-4 text-xs">
-                      <span className="text-slate-500">Showing <strong>{filteredProducts.length}</strong> items</span>
+                    <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end text-xs">
+                      <button
+                        onClick={() => setMobileFiltersOpen(true)}
+                        className="lg:hidden flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-[#040C1A] font-bold rounded-xl text-xs transition-colors"
+                      >
+                        <i className="fa-solid fa-sliders text-blue-600"></i>
+                        <span>Filters</span>
+                        {(selectedCategories.length + selectedSectors.length + selectedMaterials.length) > 0 && (
+                          <span className="w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] flex items-center justify-center font-bold">
+                            {selectedCategories.length + selectedSectors.length + selectedMaterials.length}
+                          </span>
+                        )}
+                      </button>
+                      <span className="text-slate-500 hidden sm:inline">Showing <strong>{filteredProducts.length}</strong> items</span>
                       <select
                         value={sortOption}
                         onChange={(e) => setSortOption(e.target.value)}
@@ -520,6 +533,65 @@ export default function SpaceVisionLab002Page() {
                       </select>
                     </div>
                   </div>
+
+                  {/* Mobile Slide-Over Filter Drawer */}
+                  {mobileFiltersOpen && (
+                    <div className="fixed inset-0 z-[2500] lg:hidden">
+                      <div
+                        className="fixed inset-0 bg-[#040C1A]/70 backdrop-blur-xs transition-opacity"
+                        onClick={() => setMobileFiltersOpen(false)}
+                      />
+                      <div className="fixed inset-y-0 left-0 max-w-[340px] w-full bg-white shadow-2xl z-10 flex flex-col p-6 overflow-y-auto">
+                        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                          <h3 className="font-extrabold text-base text-[#040C1A]">Filter Products</h3>
+                          <div className="flex items-center gap-3">
+                            <button
+                              onClick={resetFilters}
+                              className="text-xs font-bold text-blue-600 hover:underline cursor-pointer"
+                            >
+                              Reset All
+                            </button>
+                            <button
+                              onClick={() => setMobileFiltersOpen(false)}
+                              className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200"
+                            >
+                              &times;
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="py-5 space-y-6 flex-1">
+                          <div>
+                            <h4 className="text-xs font-mono font-bold text-slate-800 uppercase tracking-wider mb-3">
+                              Category ({categories.length})
+                            </h4>
+                            <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+                              {categories.map((cat) => (
+                                <label key={cat} className="flex items-center gap-2.5 text-xs text-slate-700 cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    checked={selectedCategories.includes(cat)}
+                                    onChange={() => toggleCategory(cat)}
+                                    className="rounded text-blue-600 w-4 h-4"
+                                  />
+                                  <span>{cat}</span>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="pt-4 border-t border-slate-100">
+                          <button
+                            onClick={() => setMobileFiltersOpen(false)}
+                            className="w-full py-3 bg-blue-600 text-white font-bold rounded-xl text-sm shadow-md"
+                          >
+                            Apply Filters ({filteredProducts.length} Results)
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredProducts.map((p) => (
