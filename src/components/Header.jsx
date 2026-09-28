@@ -24,7 +24,6 @@ export default function Header({ onOpenQuote }) {
     { name: "Home", href: "/", hasDropdown: false },
     { name: "Products", href: "/products", hasDropdown: true },
     { name: "Workstations", href: "/workstations", hasDropdown: true },
-    { name: "Materials", href: "/materials", hasDropdown: true },
     { name: "Services", href: "/services", hasDropdown: true },
     { name: "About", href: "/about", hasDropdown: false },
     { name: "Process", href: "/process", hasDropdown: false },
