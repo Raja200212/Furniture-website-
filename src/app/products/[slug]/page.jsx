@@ -56,14 +56,22 @@ export default function ProductDetailPage({ params }) {
       <main className="flex-1 pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Back to Catalogue Navigation */}
-          <div className="py-6">
+          {/* Back Navigation Bar */}
+          <div className="py-6 flex flex-wrap items-center gap-3">
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 hover:border-blue-500 hover:text-blue-600 text-[#040C1A] text-xs font-bold rounded-lg shadow-xs transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 hover:border-blue-500 hover:text-blue-600 text-[#040C1A] text-xs font-bold rounded-xl shadow-xs transition-all"
             >
               <i className="fa-solid fa-arrow-left"></i>
               <span>Back to Products Catalogue</span>
+            </Link>
+
+            <Link
+              href="/materials"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-50 border border-slate-200 hover:border-[#432C7A] hover:text-[#432C7A] text-slate-700 text-xs font-bold rounded-xl shadow-xs transition-all"
+            >
+              <i className="fa-solid fa-layer-group"></i>
+              <span>Back to Primary Categories</span>
             </Link>
           </div>
 

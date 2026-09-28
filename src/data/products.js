@@ -564,7 +564,7 @@ export const products = [
     "id": 43,
     "slug": "eye-washes-emergency-showers",
     "name": "Eye Washes Emergency Showers",
-    "category": "Specialised Furniture",
+    "category": "Fittings & Sinks",
     "image": "https://spacevisionlabs.com/images/eye-washes-emergency-showers.jpg",
     "description": "Specialised laboratory furniture and support equipment for precision and demanding workflows.",
     "tags": [
@@ -2125,7 +2125,7 @@ export const products = [
     "id": 149,
     "slug": "granite-worktop",
     "name": "Granite Worktop",
-    "category": "Worktops & Surfaces",
+    "category": "Worktops & Materials",
     "image": "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
     "description": "Heavy and dense natural stone surface finished with safe rounded edges. Best for areas with heavy testing, high static load capacity, or where sensitive precision analytical balance scales require zero-vibration steady platforms.",
     "tags": [
@@ -2142,7 +2142,7 @@ export const products = [
     "id": 150,
     "slug": "trespa-worktop",
     "name": "TRESPA Worktop",
-    "category": "Worktops & Surfaces",
+    "category": "Worktops & Materials",
     "image": "https://spacevisionlabs.com/images/laboratory-trespa-worktop.jpg",
     "description": "Advanced thermosetting resin and natural fiber construction providing superior impact resistance, thermal resilience, chemical stability, and moisture impermeability for modern laboratory benches.",
     "tags": [
@@ -2158,7 +2158,7 @@ export const products = [
     "id": 151,
     "slug": "epoxy-resin",
     "name": "Epoxy Resin Worktop",
-    "category": "Worktops & Surfaces",
+    "category": "Worktops & Materials",
     "image": "https://spacevisionlabs.com/images/laboratory-countertops-2.png",
     "description": "Solid, monolithic composition highly resistant to aggressive chemicals, boiling acids, direct thermal shock, and staining. Fitted with marine drip-grooves, making it the industry standard for chemical testing laboratories.",
     "tags": [
@@ -2175,7 +2175,7 @@ export const products = [
     "id": 152,
     "slug": "stainless-steel-worktop",
     "name": "Stainless Steel Worktop",
-    "category": "Worktops & Surfaces",
+    "category": "Worktops & Materials",
     "image": "https://spacevisionlabs.com/images/stainless_countertop.jpg",
     "description": "Rust-proof sanitary medical-grade stainless steel (SS 304 / SS 316) top that accommodates seamless welded sinks and marine edges. Extremely easy to wash down and disinfect for clinical, pharmaceutical, and biological cleanroom environments.",
     "tags": [
@@ -2192,7 +2192,7 @@ export const products = [
     "id": 153,
     "slug": "ceramic-worktop",
     "name": "Ceramic Worktop",
-    "category": "Worktops & Surfaces",
+    "category": "Worktops & Materials",
     "image": "https://spacevisionlabs.com/images/ceramic-worktop-2.jpg",
     "description": "Scratch-proof sintered ceramic slabs joined with chemical-resistant grout. Offers exceptional defense against corrosive boiling acids, sharp dissecting instruments, high temperatures, and harsh cleaning agents.",
     "tags": [
@@ -2208,7 +2208,7 @@ export const products = [
     "id": 154,
     "slug": "laminated-worktop",
     "name": "Laminated Worktop",
-    "category": "Worktops & Surfaces",
+    "category": "Worktops & Materials",
     "image": "https://spacevisionlabs.com/images/phenolic-resin-countertop-3.jpg",
     "description": "Economical high-pressure decorative laminate on moisture-resistant substrate for dry analysis, physics laboratories, school IT classrooms, and administrative prep stations.",
     "tags": [
@@ -2224,7 +2224,7 @@ export const products = [
     "id": 155,
     "slug": "polypropylene-worktop",
     "name": "Polypropylene (PP) Worktop",
-    "category": "Worktops & Surfaces",
+    "category": "Worktops & Materials",
     "image": "https://spacevisionlabs.com/images/school-laboratory-2.jpg",
     "description": "100% rust-free, zero-corrosion thermoplastic structure. Total resistance to hydrofluoric acid (HF), concentrated hydrochloric acid, aqua regia, and harsh wet chemistry.",
     "tags": [

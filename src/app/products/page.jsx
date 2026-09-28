@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -9,7 +10,13 @@ import QuoteModal from "@/components/QuoteModal";
 import { products } from "@/data/products";
 import { Search, RotateCcw, ArrowRight, Box, Sparkles } from "lucide-react";
 
-export default function ProductsPage() {
+function ProductsContent() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const sectorParam = searchParams.get("sector");
+  const materialParam = searchParams.get("material");
+  const searchUrlParam = searchParams.get("search") || searchParams.get("q");
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedSectors, setSelectedSectors] = useState([]);
@@ -18,6 +25,21 @@ export default function ProductsPage() {
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteSubject, setQuoteSubject] = useState("");
+
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategories([categoryParam]);
+    }
+    if (sectorParam) {
+      setSelectedSectors([sectorParam]);
+    }
+    if (materialParam) {
+      setSelectedMaterials([materialParam]);
+    }
+    if (searchUrlParam) {
+      setSearchQuery(searchUrlParam);
+    }
+  }, [categoryParam, sectorParam, materialParam, searchUrlParam]);
 
   const activeFilterCount = selectedCategories.length + selectedSectors.length + selectedMaterials.length;
 
@@ -46,26 +68,26 @@ export default function ProductsPage() {
   }, [categoryCounts]);
 
   const toggleCategory = (cat) => {
-    if (selectedCategories.includes(cat)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== cat));
+    if (selectedCategories.includes(cat) && selectedCategories.length === 1) {
+      setSelectedCategories([]);
     } else {
-      setSelectedCategories([...selectedCategories, cat]);
+      setSelectedCategories([cat]);
     }
   };
 
   const toggleSector = (sec) => {
-    if (selectedSectors.includes(sec)) {
-      setSelectedSectors(selectedSectors.filter((s) => s !== sec));
+    if (selectedSectors.includes(sec) && selectedSectors.length === 1) {
+      setSelectedSectors([]);
     } else {
-      setSelectedSectors([...selectedSectors, sec]);
+      setSelectedSectors([sec]);
     }
   };
 
   const toggleMaterial = (mat) => {
-    if (selectedMaterials.includes(mat)) {
-      setSelectedMaterials(selectedMaterials.filter((m) => m !== mat));
+    if (selectedMaterials.includes(mat) && selectedMaterials.length === 1) {
+      setSelectedMaterials([]);
     } else {
-      setSelectedMaterials([...selectedMaterials, mat]);
+      setSelectedMaterials([mat]);
     }
   };
 
@@ -151,8 +173,41 @@ export default function ProductsPage() {
       <main className="flex-1 pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
+          {/* Top Navigation & Back Breadcrumb */}
+          <div className="pt-6 pb-2 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/materials"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 hover:border-[#432C7A] hover:text-[#432C7A] text-[#040C1A] text-xs font-bold rounded-xl shadow-xs transition-all cursor-pointer group"
+              >
+                <i className="fa-solid fa-arrow-left text-[#432C7A] group-hover:-translate-x-1 transition-transform"></i>
+                <span>Back to Primary Categories</span>
+              </Link>
+
+              {activeFilterCount > 0 && (
+                <button
+                  type="button"
+                  onClick={resetAllFilters}
+                  className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-blue-50 border border-blue-200 hover:bg-blue-100 text-blue-700 text-xs font-bold rounded-xl shadow-xs transition-all cursor-pointer"
+                >
+                  <i className="fa-solid fa-rotate-left text-[11px]"></i>
+                  <span>Clear Filter ({activeFilterCount})</span>
+                </button>
+              )}
+            </div>
+
+            {/* Quick Breadcrumb */}
+            <div className="text-xs font-mono text-slate-500 flex items-center gap-2">
+              <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
+              <span>/</span>
+              <Link href="/materials" className="hover:text-[#432C7A] font-medium transition-colors">Materials & Categories</Link>
+              <span>/</span>
+              <span className="text-[#040C1A] font-bold">Catalogue</span>
+            </div>
+          </div>
+
           {/* Header Title Banner */}
-          <div className="py-8 sm:py-10">
+          <div className="py-6 sm:py-8">
             <div className="inline-flex items-center gap-2 font-mono text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">
               <span className="w-4 h-0.5 bg-blue-600"></span>
               <span>Official Product Database</span>
@@ -195,7 +250,7 @@ export default function ProductsPage() {
                         <button
                           type="button"
                           onClick={() => toggleCategory(cat)}
-                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all ${
+                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer ${
                             isSelected
                               ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
                               : "text-slate-600 hover:text-[#040C1A] hover:bg-slate-100/80 font-medium"
@@ -231,7 +286,7 @@ export default function ProductsPage() {
                         <button
                           type="button"
                           onClick={() => toggleSector(sec.id)}
-                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all ${
+                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer ${
                             isSelected
                               ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
                               : "text-slate-600 hover:text-[#040C1A] hover:bg-slate-100/80 font-medium"
@@ -264,7 +319,7 @@ export default function ProductsPage() {
                         <button
                           type="button"
                           onClick={() => toggleMaterial(mat.id)}
-                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all ${
+                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer ${
                             isSelected
                               ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
                               : "text-slate-600 hover:text-[#040C1A] hover:bg-slate-100/80 font-medium"
@@ -476,7 +531,7 @@ export default function ProductsPage() {
                         <button
                           type="button"
                           onClick={() => toggleCategory(cat)}
-                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all ${
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all outline-none focus:outline-none cursor-pointer ${
                             isSelected
                               ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
                               : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/80 font-medium"
@@ -512,7 +567,7 @@ export default function ProductsPage() {
                         <button
                           type="button"
                           onClick={() => toggleSector(sec.id)}
-                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all ${
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all outline-none focus:outline-none cursor-pointer ${
                             isSelected
                               ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
                               : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/80 font-medium"
@@ -545,7 +600,7 @@ export default function ProductsPage() {
                         <button
                           type="button"
                           onClick={() => toggleMaterial(mat.id)}
-                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all ${
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all outline-none focus:outline-none cursor-pointer ${
                             isSelected
                               ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
                               : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/80 font-medium"
@@ -580,5 +635,13 @@ export default function ProductsPage() {
       <WhatsAppFloat />
       <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} initialData={quoteSubject} />
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <ProductsContent />
+    </Suspense>
   );
 }
