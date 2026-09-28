@@ -18,7 +18,7 @@ export default function SolutionsSection({ onOpenQuote }) {
             Tailored Industry Solutions
           </h2>
           <p className="text-sm sm:text-base text-slate-600 mt-3">
-            From K-12 STEM classrooms and high-throughput pathology suites to ISO Class cleanrooms and deployable container laboratories.
+            From K-12 STEM classrooms and high-throughput pathology suites to ISO Class cleanrooms and advanced research facilities.
           </p>
         </div>
 

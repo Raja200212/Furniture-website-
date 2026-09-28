@@ -421,7 +421,8 @@ export default function SpaceVisionLab002Page() {
               </div>
             </section>
 
-            {/* Featured Product Discovery */}
+            {/* Featured Product Discovery (COMMENTED OUT) */}
+            {/*
             <section className="py-20 bg-white border-b border-slate-200">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
@@ -461,6 +462,7 @@ export default function SpaceVisionLab002Page() {
                 </div>
               </div>
             </section>
+            */}
           </div>
         )}
 
@@ -482,18 +484,25 @@ export default function SpaceVisionLab002Page() {
 
                   <div>
                     <h4 className="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-3">Category</h4>
-                    <div className="space-y-2 max-h-60 overflow-y-auto pr-2">
-                      {categories.map((cat) => (
-                        <label key={cat} className="flex items-center gap-2 text-xs text-slate-700 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={selectedCategories.includes(cat)}
-                            onChange={() => toggleCategory(cat)}
-                            className="rounded text-blue-600"
-                          />
-                          <span>{cat}</span>
-                        </label>
-                      ))}
+                    <div className="space-y-1.5 max-h-60 overflow-y-auto pr-2">
+                      {categories.map((cat) => {
+                        const isSelected = selectedCategories.includes(cat);
+                        return (
+                          <button
+                            key={cat}
+                            type="button"
+                            onClick={() => toggleCategory(cat)}
+                            className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs text-left transition-all ${
+                              isSelected
+                                ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
+                                : "text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-medium"
+                            }`}
+                          >
+                            <span>{cat}</span>
+                            {isSelected && <i className="fa-solid fa-check text-[10px] text-blue-600"></i>}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </aside>
@@ -565,18 +574,25 @@ export default function SpaceVisionLab002Page() {
                             <h4 className="text-xs font-mono font-bold text-slate-800 uppercase tracking-wider mb-3">
                               Category ({categories.length})
                             </h4>
-                            <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
-                              {categories.map((cat) => (
-                                <label key={cat} className="flex items-center gap-2.5 text-xs text-slate-700 cursor-pointer">
-                                  <input
-                                    type="checkbox"
-                                    checked={selectedCategories.includes(cat)}
-                                    onChange={() => toggleCategory(cat)}
-                                    className="rounded text-blue-600 w-4 h-4"
-                                  />
-                                  <span>{cat}</span>
-                                </label>
-                              ))}
+                            <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
+                              {categories.map((cat) => {
+                                const isSelected = selectedCategories.includes(cat);
+                                return (
+                                  <button
+                                    key={cat}
+                                    type="button"
+                                    onClick={() => toggleCategory(cat)}
+                                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs text-left transition-all ${
+                                      isSelected
+                                        ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
+                                        : "text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-medium"
+                                    }`}
+                                  >
+                                    <span>{cat}</span>
+                                    {isSelected && <i className="fa-solid fa-check text-[10px] text-blue-600"></i>}
+                                  </button>
+                                );
+                              })}
                             </div>
                           </div>
                         </div>

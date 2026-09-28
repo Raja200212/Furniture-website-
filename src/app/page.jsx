@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -24,34 +25,47 @@ import {
   ChevronLeft,
   ChevronRight,
   Search,
-  X
+  X,
+  Plus
 } from "lucide-react";
 
 const heroSlides = [
   {
-    image: "https://productimages.withfloats.com/actual/68a88c7de1493bda3146b398.png",
-    tag: "MANUFACTURING STANDARD",
-    title: "Integrated Lab Solutions",
-    desc: "Space planning, 3D CAD rendering & accurate BOQ project support."
+    image: "/industrial-lab.jpg",
+    title: "Best Laboratory Equipment & Supplies In India.",
+    badge: "Space Vision Lab",
+    badgeLinkText: "Discover The Benefits of Space Vision Lab",
+    subtitle: "Advanced Scientific Furniture, Cleanroom Systems & Analytical Instruments"
   },
   {
-    image: "https://spacevisionlabs.com/images/school-laboratory-2.jpg",
-    tag: "ACADEMIC & STEAM EXCELLENCE",
-    title: "Modular STEAM Science Labs",
-    desc: "Safe, durable student workstations & teacher demonstration podiums."
+    image: "/hero-instruments.jpg",
+    title: "High-Precision Laboratory Instruments & Analyzers.",
+    badge: "Certified Precision",
+    badgeLinkText: "Explore Analytical & Diagnostic Instruments",
+    subtitle: "Spectrophotometers, Centrifuges, Meters & Automated Workstations"
   },
   {
-    image: "https://spacevisionlabs.com/images/h-frame-lab-bench-2.jpg",
-    tag: "STRUCTURAL PLATFORMS",
-    title: "H-Frame & C-Frame Heavy Duty Systems",
-    desc: "Cold-rolled welded steel frames with 1000kg static load capacity."
+    image: "/university-lab.jpg",
+    title: "Modular Research Workstations & Fume Hoods.",
+    badge: "Turnkey Lab Engineering",
+    badgeLinkText: "View University & Industrial Workstations",
+    subtitle: "Heavy-Duty Steel Frames, Epoxy Countertops & Fume Containment"
   },
   {
-    image: "https://spacevisionlabs.com/images/vav-fume-hood.jpg",
-    tag: "SAFETY & CONTAINMENT",
-    title: "Certified Fume Extraction Hoods",
-    desc: "SEFA-1 compliant ducted exhaust systems with smart aerodynamic sashes."
+    image: "/healthcare-lab.jpg",
+    title: "Sanitary Clinical & Pathology Furniture Systems.",
+    badge: "Healthcare & Cleanrooms",
+    badgeLinkText: "Explore Medical Grade Stainless Steel Solutions",
+    subtitle: "ISO Class Cleanroom Equipment, Pass Boxes & Bio-Safety Cabinets"
   }
+];
+
+const quickCategories = [
+  { name: "Lab Consumables & Glassware", path: "/products" },
+  { name: "Liquid Handling", path: "/products" },
+  { name: "Thermometers & Meters", path: "/products" },
+  { name: "Modular Workstations", path: "/products" },
+  { name: "Fume Hoods & Safety", path: "/products" }
 ];
 
 const airHandlingItems = [
@@ -80,7 +94,7 @@ const turnkeySteps = [
     step: "01",
     title: "Discover",
     subtitle: "Site Survey & Assessment",
-    image: "https://spacevisionlabs.com/images/clean-room-booth.jpg",
+    image: "/turnkey-discover.jpg",
     desc: "Site visits, brief assessment, and understanding exact chemical, electrical, and workflow requirements.",
     points: [
       "3D laser space scanning & layout evaluation",
@@ -92,7 +106,7 @@ const turnkeySteps = [
     step: "02",
     title: "Design",
     subtitle: "3D CAD & BOQ Planning",
-    image: "https://productimages.withfloats.com/actual/68a88c7de1493bda3146b398.png",
+    image: "/turnkey-design.jpg",
     desc: "Space planning, technical layout drawings, material selection, and accurate BOQ quotation generation.",
     points: [
       "Photorealistic 3D virtual lab simulations",
@@ -104,7 +118,7 @@ const turnkeySteps = [
     step: "03",
     title: "Manufacture",
     subtitle: "Precision CNC Fabrication",
-    image: "https://spacevisionlabs.com/images/h-frame-lab-bench-2.jpg",
+    image: "/turnkey-manufacture.jpg",
     desc: "Controlled in-house production with precision sheet metal, woodwork, and powder-coating lines.",
     points: [
       "CNC laser cutting & robotic welding lines",
@@ -116,7 +130,7 @@ const turnkeySteps = [
     step: "04",
     title: "Deliver",
     subtitle: "Turnkey Installation & Commissioning",
-    image: "https://spacevisionlabs.com/images/school-laboratory-2.jpg",
+    image: "/turnkey-deliver.jpg",
     desc: "Safe transport, on-site structural assembly, utility integration, and final project handover.",
     points: [
       "Crated shock-proof logistics & delivery",
@@ -127,10 +141,12 @@ const turnkeySteps = [
 ];
 
 export default function HomePage() {
+  const router = useRouter();
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteSubject, setQuoteSubject] = useState("");
   const [airTab, setAirTab] = useState(0);
   const [heroSlide, setHeroSlide] = useState(0);
+  const [heroSearchInput, setHeroSearchInput] = useState("");
   const [homeSearch, setHomeSearch] = useState("");
   const [homeCategory, setHomeCategory] = useState("All");
   const [contactSubmitted, setContactSubmitted] = useState(false);
@@ -147,7 +163,7 @@ export default function HomePage() {
   useEffect(() => {
     const timer = setInterval(() => {
       setHeroSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 4500);
+    }, 5500);
     return () => clearInterval(timer);
   }, [heroSlides.length]);
 
@@ -157,6 +173,15 @@ export default function HomePage() {
     }, 4500);
     return () => clearInterval(airTimer);
   }, [airHandlingItems.length]);
+
+  const handleHeroSearchSubmit = (e) => {
+    e.preventDefault();
+    if (heroSearchInput.trim()) {
+      router.push(`/products?search=${encodeURIComponent(heroSearchInput.trim())}`);
+    } else {
+      router.push(`/products`);
+    }
+  };
 
   const featuredProducts = products
     .filter((p) => {
@@ -190,115 +215,157 @@ export default function HomePage() {
       <main className="flex-1 pt-20">
         
         {/* ==========================================================================
-            1. HIGH-IMPACT HERO SECTION
+            1. LABFRIEND-STYLE CLEAN MODERN HERO SECTION
             ========================================================================== */}
-        <section className="relative py-10 sm:py-16 md:py-24 bg-gradient-to-br from-white via-slate-50 to-[#EBF2F9] border-b border-slate-200 overflow-hidden tech-grid-bg">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <section className="relative pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 bg-[#FAFCFF] overflow-hidden border-b border-slate-100">
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
               
               {/* Hero Left Content */}
               <div className="lg:col-span-6 flex flex-col items-start text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200/90 text-slate-800 text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider mb-4 sm:mb-6 shadow-xs max-w-full">
-                  <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-ping shrink-0"></span>
-                  <span className="truncate">SPACE VISION LAB • SMART & FUNCTIONAL</span>
-                </div>
+                
+                {/* Top Badge (Labfriend Style) */}
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-slate-200/90 shadow-xs hover:border-blue-400 transition-all mb-6 group cursor-pointer"
+                >
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold text-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+                    {heroSlides[heroSlide].badge || "Space Vision Lab"}
+                  </span>
+                  <span className="text-xs sm:text-[13px] font-semibold text-slate-700 group-hover:text-blue-600 flex items-center gap-1 transition-colors">
+                    {heroSlides[heroSlide].badgeLinkText || "Discover The Benefits of Space Vision Lab"}
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
 
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#040C1A] tracking-tight leading-[1.12] sm:leading-[1.08] mb-4 sm:mb-6">
-                  Laboratories Designed for Better Work.
+                {/* Main Bold Headline */}
+                <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black text-slate-900 tracking-tight leading-[1.08] mb-5">
+                  {heroSlides[heroSlide].title || "Best Laboratory Equipment & Supplies In India."}
                 </h1>
 
-                <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed mb-6 sm:mb-8 max-w-xl">
-                  Smart, durable and functional laboratory furniture systems engineered around how your space actually works. Complete turnkey manufacturing under one roof.
+                {/* Subtitle description */}
+                <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed mb-7 max-w-lg">
+                  {heroSlides[heroSlide].subtitle}
                 </p>
 
-                <div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-3">
+                {/* Interactive Search Bar */}
+                <form onSubmit={handleHeroSearchSubmit} className="relative w-full max-w-lg mb-5">
+                  <input
+                    type="text"
+                    value={heroSearchInput}
+                    onChange={(e) => setHeroSearchInput(e.target.value)}
+                    placeholder="Search through 51,000+ products..."
+                    className="w-full bg-white border border-slate-200/90 rounded-xl py-3.5 pl-4 pr-12 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-50/80 transition-all"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-blue-600 p-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+                    aria-label="Search"
+                  >
+                    <Search className="w-5 h-5" />
+                  </button>
+                </form>
+
+                {/* Quick Category Filter Pills */}
+                <div className="flex flex-wrap items-center gap-2 max-w-xl">
+                  {quickCategories.map((cat, idx) => (
+                    <Link
+                      key={idx}
+                      href={cat.path}
+                      className="px-3.5 py-1.5 rounded-full bg-slate-100/90 hover:bg-blue-50 hover:text-blue-700 text-xs sm:text-[13px] font-semibold text-slate-700 border border-slate-200/60 transition-all shadow-2xs"
+                    >
+                      {cat.name}
+                    </Link>
+                  ))}
                   <Link
                     href="/products"
-                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold px-7 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-blue-600/25 hover:-translate-y-0.5 text-xs sm:text-sm text-center"
+                    className="inline-flex items-center gap-1 text-xs sm:text-[13px] font-bold text-slate-800 hover:text-blue-600 transition-colors px-2 py-1"
                   >
-                    <span>Explore Products</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>View more categories</span>
+                    <Plus className="w-3.5 h-3.5" />
                   </Link>
-
-                  <a
-                    href="https://wa.me/918193856070?text=Hello%20Space%20Vision%20Lab,%20I%20would%20like%20to%20plan%20a%20laboratory%20project."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-6 py-3.5 rounded-xl transition-all duration-300 shadow-md hover:-translate-y-0.5 text-xs sm:text-sm text-center"
-                  >
-                    <MessageSquare className="w-4 h-4" />
-                    <span>Direct WhatsApp Chat</span>
-                  </a>
                 </div>
+
               </div>
 
-              {/* Hero Right Visual Card with Responsive Interactive Slider */}
-              <div className="lg:col-span-6 relative group w-full">
-                <div className="relative rounded-3xl bg-white p-2.5 sm:p-3.5 border border-slate-200 shadow-2xl overflow-hidden">
-                  
-                  {/* Slide Image - Responsive Height */}
-                  <div className="relative h-[340px] sm:h-[480px] lg:h-[560px] w-full rounded-2xl overflow-hidden bg-slate-900">
-                    <img
-                      key={heroSlide}
-                      src={heroSlides[heroSlide].image}
-                      alt={heroSlides[heroSlide].title}
-                      className="w-full h-full object-cover rounded-2xl animate-in fade-in zoom-in-95 duration-700"
-                    />
-                    
-                    {/* Subtle bottom shadow gradient for pure text legibility */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
+              {/* Hero Right Visual Card with Interactive Thumbnail Preview Switcher */}
+              <div className="lg:col-span-6 relative">
+                
+                {/* Main Image Container */}
+                <div className="relative w-full h-[360px] sm:h-[440px] lg:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 bg-slate-100">
+                  <img
+                    key={heroSlide}
+                    src={heroSlides[heroSlide].image}
+                    alt={heroSlides[heroSlide].title}
+                    className="w-full h-full object-cover transition-all duration-700 animate-in fade-in zoom-in-95"
+                  />
 
-                    {/* Left / Right Slider Navigation Buttons - Mobile Touch Friendly */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Slide Indicators on Main Image */}
+                  <div className="absolute bottom-4 left-6 flex items-center gap-2 z-10">
+                    {heroSlides.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setHeroSlide(idx)}
+                        className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                          heroSlide === idx 
+                            ? "w-7 bg-white" 
+                            : "w-2 bg-white/50 hover:bg-white/80"
+                        }`}
+                        aria-label={`Slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Navigation Arrows */}
+                  <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
                     <button
                       onClick={() => setHeroSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1))}
-                      className="absolute top-1/2 left-2.5 sm:left-4 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center transition-all opacity-90 sm:opacity-0 sm:group-hover:opacity-100 shadow-lg cursor-pointer backdrop-blur-sm active:scale-95"
-                      aria-label="Previous Slide"
+                      className="w-8 h-8 rounded-full bg-white/80 hover:bg-white text-slate-800 shadow-md flex items-center justify-center transition-all backdrop-blur-sm cursor-pointer"
+                      aria-label="Previous"
                     >
-                      <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+                      <ChevronLeft className="w-4 h-4" />
                     </button>
-
                     <button
                       onClick={() => setHeroSlide((prev) => (prev + 1) % heroSlides.length)}
-                      className="absolute top-1/2 right-2.5 sm:right-4 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center transition-all opacity-90 sm:opacity-0 sm:group-hover:opacity-100 shadow-lg cursor-pointer backdrop-blur-sm active:scale-95"
-                      aria-label="Next Slide"
+                      className="w-8 h-8 rounded-full bg-white/80 hover:bg-white text-slate-800 shadow-md flex items-center justify-center transition-all backdrop-blur-sm cursor-pointer"
+                      aria-label="Next"
                     >
-                      <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                      <ChevronRight className="w-4 h-4" />
                     </button>
-
-                    {/* Dot Indicators */}
-                    <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
-                      {heroSlides.map((_, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setHeroSlide(idx)}
-                          className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                            heroSlide === idx ? "w-5 bg-blue-500" : "w-1.5 bg-white/40"
-                          }`}
-                          aria-label={`Slide ${idx + 1}`}
-                        />
-                      ))}
-                    </div>
                   </div>
-                  
-                  {/* Floating HUD - Clean Minimalist Text */}
-                  <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white p-0">
-                    <span className="text-[10px] sm:text-xs font-mono font-bold text-cyan-300 uppercase tracking-widest block drop-shadow-md mb-1">
-                      {heroSlides[heroSlide].tag}
-                    </span>
 
-                    <h4 className="text-lg sm:text-2xl font-black text-white leading-tight drop-shadow-md line-clamp-2">
-                      {heroSlides[heroSlide].title}
-                    </h4>
-                    
-                    <p className="text-[11px] sm:text-xs lg:text-sm text-slate-100 mt-1 leading-relaxed drop-shadow-md line-clamp-2 sm:line-clamp-none max-w-xl">
-                      {heroSlides[heroSlide].desc}
-                    </p>
+                </div>
+
+                {/* Floating Preview Thumbnail Switcher Card (Matches Reference Thumbnail) */}
+                <div 
+                  onClick={() => setHeroSlide((prev) => (prev + 1) % heroSlides.length)}
+                  className="hidden sm:flex absolute -bottom-6 -right-4 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-slate-200/90 items-center gap-3 cursor-pointer hover:shadow-2xl hover:border-blue-400 transition-all duration-300 group max-w-[260px] z-20"
+                >
+                  <div className="w-16 h-14 rounded-xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
+                    <img
+                      src={heroSlides[(heroSlide + 1) % heroSlides.length].image}
+                      alt="Next preview"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="flex flex-col text-left pr-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600">Next Showcase</span>
+                    <span className="text-xs font-bold text-slate-800 line-clamp-1 group-hover:text-blue-600 transition-colors">
+                      {heroSlides[(heroSlide + 1) % heroSlides.length].badge}
+                    </span>
+                    <span className="text-[11px] text-slate-500 line-clamp-1">Click to switch</span>
                   </div>
                 </div>
+
               </div>
 
             </div>
           </div>
+
         </section>
 
         {/* ==========================================================================
@@ -421,7 +488,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               
               <Link href="/solutions" className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl hover:border-blue-500 transition-all flex flex-col justify-between hover:-translate-y-1">
-                <img src="https://spacevisionlabs.com/images/school-laboratory-furniture-supplier-2.jpg" alt="Schools" className="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src="/school-lab.jpg" alt="Schools & STEAM Laboratory Furniture" className="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
                     <span className="text-[11px] font-mono font-bold text-blue-600">01 — SCHOOLS</span>
@@ -435,7 +502,7 @@ export default function HomePage() {
               </Link>
 
               <Link href="/solutions" className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl hover:border-blue-500 transition-all flex flex-col justify-between hover:-translate-y-1">
-                <img src="https://spacevisionlabs.com/images/h-frame-lab-bench-2.jpg" alt="Universities" className="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src="/university-lab.jpg" alt="University Research Laboratory Furniture" className="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
                     <span className="text-[11px] font-mono font-bold text-blue-600">02 — UNIVERSITIES</span>
@@ -449,7 +516,7 @@ export default function HomePage() {
               </Link>
 
               <Link href="/solutions" className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl hover:border-blue-500 transition-all flex flex-col justify-between hover:-translate-y-1">
-                <img src="https://spacevisionlabs.com/images/pathology-workstation.jpg" alt="Healthcare" className="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src="/healthcare-lab.jpg" alt="Clinics & Hospitals Laboratory Furniture" className="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
                     <span className="text-[11px] font-mono font-bold text-blue-600">03 — HEALTHCARE</span>
@@ -463,7 +530,7 @@ export default function HomePage() {
               </Link>
 
               <Link href="/solutions" className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl hover:border-blue-500 transition-all flex flex-col justify-between hover:-translate-y-1">
-                <img src="https://spacevisionlabs.com/images/pp-lab-bench-4.jpg" alt="Industrial" className="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src="/industrial-lab.jpg" alt="Industrial Laboratory Furniture" className="h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
                     <span className="text-[11px] font-mono font-bold text-blue-600">04 — INDUSTRIAL</span>
@@ -556,13 +623,13 @@ export default function HomePage() {
         </section>
 
         {/* ==========================================================================
-            6. AIR HANDLING & CRITICAL CONTAINMENT
+            6. AIR HANDLING & CRITICAL CONTAINMENT (COMMENTED OUT)
             ========================================================================== */}
+        {/*
         <section className="py-12 sm:py-20 bg-[#040C1A] text-white relative tech-grid-dark">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
-              {/* Left Selector Navigation */}
               <div className="lg:col-span-6">
                 <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest block mb-2">
                   CONTAINMENT & VENTILATION
@@ -595,7 +662,6 @@ export default function HomePage() {
                       </div>
                       <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed">{item.desc}</p>
 
-                      {/* Auto Progress Bar on Active Tab */}
                       {airTab === idx && (
                         <div className="mt-3 h-1 w-full bg-white/10 rounded-full overflow-hidden">
                           <div className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-[progress_4.5s_linear]" />
@@ -606,11 +672,9 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Right Active Air Handling Display with Interactive Slider */}
               <div className="lg:col-span-6">
                 <div className="bg-[#0A1C38] rounded-3xl border border-slate-700/80 p-5 sm:p-8 shadow-2xl relative overflow-hidden">
                   
-                  {/* Image Display */}
                   <div className="bg-white rounded-2xl p-4 sm:p-6 h-56 sm:h-72 flex items-center justify-center mb-5 sm:mb-6 overflow-hidden">
                     <img
                       key={airTab}
@@ -641,7 +705,6 @@ export default function HomePage() {
                     ))}
                   </div>
 
-                  {/* Interactive Slider Bar */}
                   <div className="pt-3 sm:pt-4 border-t border-white/10 flex items-center gap-2">
                     {airHandlingItems.map((_, idx) => (
                       <button
@@ -667,6 +730,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+        */}
 
         {/* ==========================================================================
             7. WORKTOP MATERIALS EXPLORER
@@ -685,63 +749,54 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-              
-              <div className="bg-[#F4F8FC] rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
-                <img src="https://spacevisionlabs.com/images/anti-vibration-balance-table.png" alt="Granite" className="h-44 w-full object-cover" />
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-base font-extrabold text-[#040C1A] mb-1.5">Granite Worktop</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">Heavy and dense natural stone surface finished with safe rounded edges. Best for areas with heavy testing or where sensitive scales need a steady surface.</p>
+            <div className="max-w-xl mx-auto">
+              <Link 
+                href="/products/granite-worktop" 
+                className="bg-[#F4F8FC] hover:bg-white rounded-3xl border border-slate-200 hover:border-blue-500 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer"
+              >
+                <div>
+                  <div className="h-64 sm:h-72 w-full overflow-hidden bg-slate-100 relative">
+                    <img 
+                      src="https://spacevisionlabs.com/images/anti-vibration-balance-table.png" 
+                      alt="Granite Worktop" 
+                      className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    />
+                  </div>
+                  <div className="p-6 sm:p-8">
+                    <div className="inline-block px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100 font-mono text-[10px] font-bold uppercase tracking-wider mb-2.5">
+                      NATURAL STONE
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-[#040C1A] group-hover:text-blue-600 transition-colors mb-2 flex items-center justify-between">
+                      <span>Granite Worktop</span>
+                      <ArrowRight className="w-5 h-5 text-blue-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                    </h3>
+                    <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                      Heavy and dense natural stone surface finished with safe rounded edges. Best for areas with heavy testing, high static load capacity, or where sensitive analytical balances need a steady, zero-vibration surface.
+                    </p>
+                    <div className="flex flex-wrap gap-2 text-xs font-semibold text-slate-600 mb-2">
+                      <span className="bg-white border border-slate-200 px-3 py-1 rounded-lg">Vibration-Damping</span>
+                      <span className="bg-white border border-slate-200 px-3 py-1 rounded-lg">Polished Beveled Edge</span>
+                      <span className="bg-white border border-slate-200 px-3 py-1 rounded-lg">Heavy Load Support</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className="bg-[#F4F8FC] rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
-                <img src="https://spacevisionlabs.com/images/laboratory-trespa-worktop.jpg" alt="TRESPA" className="h-44 w-full object-cover" />
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-base font-extrabold text-[#040C1A] mb-1.5">TRESPA Worktop</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">Advanced thermosetting resin and natural fiber construction providing superior impact, thermal, chemical, and moisture resistance.</p>
+                <div className="px-6 sm:px-8 pb-6 pt-0 flex items-center justify-between">
+                  <span className="text-xs font-bold text-blue-600 inline-flex items-center gap-1.5 group-hover:underline">
+                    View Product Details <ArrowRight className="w-4 h-4" />
+                  </span>
+                  <span className="text-xs font-semibold text-slate-400">
+                    Explore all surfaces in <Link href="/materials" className="text-blue-600 underline hover:text-blue-700">Materials</Link>
+                  </span>
                 </div>
-              </div>
-
-              <div className="bg-[#F4F8FC] rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
-                <img src="https://spacevisionlabs.com/images/laboratory-countertops-2.png" alt="Epoxy Resin" className="h-44 w-full object-cover" />
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-base font-extrabold text-[#040C1A] mb-1.5">Epoxy Resin</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">Solid, monolithic composition highly resistant to aggressive chemicals, direct heat, and staining. Standard choice for modern chemistry testing labs.</p>
-                </div>
-              </div>
-
-              <div className="bg-[#F4F8FC] rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
-                <img src="https://spacevisionlabs.com/images/stainless_countertop.jpg" alt="Stainless Steel" className="h-44 w-full object-cover" />
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-base font-extrabold text-[#040C1A] mb-1.5">Stainless Steel</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">Rust-proof sanitary steel top that accommodates seamless welded sinks. Easy to wash down and disinfect for clinical and biological environments.</p>
-                </div>
-              </div>
-
-              <div className="bg-[#F4F8FC] rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
-                <img src="https://spacevisionlabs.com/images/ceramic-worktop-2.jpg" alt="Ceramic Worktop" className="h-44 w-full object-cover" />
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-base font-extrabold text-[#040C1A] mb-1.5">Ceramic Worktop</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">Scratch-proof ceramic slabs joined with chemical-resistant grout. Exceptional defense against corrosive acids, sharp instruments, and high heat.</p>
-                </div>
-              </div>
-
-              <div className="bg-[#F4F8FC] rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
-                <img src="https://spacevisionlabs.com/images/phenolic-resin-countertop-3.jpg" alt="Laminated Worktop" className="h-44 w-full object-cover" />
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-base font-extrabold text-[#040C1A] mb-1.5">Laminated Worktop</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">Economical top for dry analysis, office administration, and student IT labs. Waterproof substrate faced with robust decorative laminate.</p>
-                </div>
-              </div>
-
+              </Link>
             </div>
           </div>
         </section>
 
         {/* ==========================================================================
-            8. PRODUCT DISCOVERY SECTION
+            8. PRODUCT DISCOVERY SECTION (COMMENTED OUT)
             ========================================================================== */}
+        {/*
         <section className="py-12 sm:py-20 bg-[#F4F8FC] border-t border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
@@ -756,13 +811,10 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Modern Product Discovery Toolbar */}
             <div className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/90 shadow-sm mb-8 sm:mb-10 space-y-4">
               
-              {/* Top Row: Search Input & Catalogue Action */}
               <div className="flex flex-col md:flex-row gap-3 sm:gap-4 items-stretch md:items-center justify-between">
                 
-                {/* Search Input with Icon */}
                 <div className="relative w-full md:max-w-md">
                   <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
                     <Search className="w-4 h-4" />
@@ -785,7 +837,6 @@ export default function HomePage() {
                   )}
                 </div>
 
-                {/* Right: Counter Badge & Explore Catalogue Button */}
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full md:w-auto justify-between md:justify-end">
                   <span className="text-[11px] sm:text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full">
                     Showing <strong className="text-[#040C1A]">{featuredProducts.length}</strong> items
@@ -801,7 +852,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Bottom Row: Quick Category Filter Pills */}
               <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 border-t border-slate-100 text-xs no-scrollbar">
                 <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider shrink-0 mr-1">
                   Filter:
@@ -833,7 +883,6 @@ export default function HomePage() {
 
             </div>
 
-            {/* Products Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {featuredProducts.map((p) => (
                 <div
@@ -868,6 +917,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+        */}
 
         {/* ==========================================================================
             9. TURNKEY PROCESS ROADMAP

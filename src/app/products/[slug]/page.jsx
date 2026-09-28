@@ -23,7 +23,18 @@ export default function ProductDetailPage({ params }) {
     }
   }, []);
 
-  const product = products.find((p) => p.slug === slug) || products[0];
+  const normalizedSlug = (slug || "").toLowerCase().trim();
+  const product = products.find((p) => {
+    const pSlug = (p.slug || "").toLowerCase();
+    if (pSlug === normalizedSlug) return true;
+    if (normalizedSlug === "laboratory-trespa-worktop" && pSlug === "trespa-worktop") return true;
+    return (
+      pSlug === `${normalizedSlug}-worktop` ||
+      normalizedSlug === `${pSlug}-worktop` ||
+      pSlug.replace(/-/g, "") === normalizedSlug.replace(/-/g, "") ||
+      p.name.toLowerCase().replace(/[^a-z0-9]/g, "-").includes(normalizedSlug)
+    );
+  }) || products[0];
 
   const relatedProducts = products
     .filter((p) => p.category === product.category && p.slug !== product.slug)

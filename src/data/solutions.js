@@ -51,7 +51,7 @@ export const solutions = [
     features: [
       "HEPA / ULPA air filtration with laminar downward airflow",
       "Electropolished stainless steel interlocked pass boxes",
-      "Rapid deployment containerized field laboratories (20GP / 40HQ)",
+      "Modular hygienic partition panels & laminar flow workstations",
       "Positive pressure airlock and dynamic air shower vestibules"
     ]
   }
@@ -108,7 +108,7 @@ export const processSteps = [
     step: "01",
     title: "Discover",
     subtitle: "Site Survey & Assessment",
-    image: "https://spacevisionlabs.com/images/clean-room-booth.jpg",
+    image: "/turnkey-discover.jpg",
     desc: "Site visits, brief assessment, and understanding exact chemical, electrical, and workflow requirements.",
     points: [
       "3D laser space scanning & layout evaluation",
@@ -120,7 +120,7 @@ export const processSteps = [
     step: "02",
     title: "Design",
     subtitle: "3D CAD & BOQ Planning",
-    image: "https://productimages.withfloats.com/actual/68a88c7de1493bda3146b398.png",
+    image: "/turnkey-design.jpg",
     desc: "Space planning, technical layout drawings, material selection, and accurate BOQ quotation generation.",
     points: [
       "Photorealistic 3D virtual lab simulations",
@@ -132,7 +132,7 @@ export const processSteps = [
     step: "03",
     title: "Manufacture",
     subtitle: "Precision CNC Fabrication",
-    image: "https://spacevisionlabs.com/images/h-frame-lab-bench-2.jpg",
+    image: "/turnkey-manufacture.jpg",
     desc: "Controlled in-house production with precision sheet metal, woodwork, and powder-coating lines.",
     points: [
       "CNC laser cutting & robotic welding lines",
@@ -144,7 +144,7 @@ export const processSteps = [
     step: "04",
     title: "Deliver",
     subtitle: "Turnkey Installation & Commissioning",
-    image: "https://spacevisionlabs.com/images/school-laboratory-2.jpg",
+    image: "/turnkey-deliver.jpg",
     desc: "Safe transport, on-site structural assembly, utility integration, and final project handover.",
     points: [
       "Crated shock-proof logistics & delivery",

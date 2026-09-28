@@ -187,23 +187,28 @@ export default function ProductsPage() {
                 <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-3">
                   Primary Category
                 </div>
-                <ul className="space-y-2 max-h-64 overflow-y-auto pr-2 text-xs">
-                  {categories.map((cat) => (
-                    <li key={cat}>
-                      <label className="flex items-center justify-between text-slate-600 hover:text-slate-900 cursor-pointer py-0.5">
-                        <div className="flex items-center gap-2.5">
-                          <input
-                            type="checkbox"
-                            checked={selectedCategories.includes(cat)}
-                            onChange={() => toggleCategory(cat)}
-                            className="w-4 h-4 rounded text-blue-600 accent-blue-600 cursor-pointer"
-                          />
-                          <span className="font-medium">{cat}</span>
-                        </div>
-                        <span className="text-[11px] text-slate-400 font-mono">({categoryCounts[cat]})</span>
-                      </label>
-                    </li>
-                  ))}
+                <ul className="space-y-1 max-h-64 overflow-y-auto pr-1 text-xs">
+                  {categories.map((cat) => {
+                    const isSelected = selectedCategories.includes(cat);
+                    return (
+                      <li key={cat}>
+                        <button
+                          type="button"
+                          onClick={() => toggleCategory(cat)}
+                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all ${
+                            isSelected
+                              ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
+                              : "text-slate-600 hover:text-[#040C1A] hover:bg-slate-100/80 font-medium"
+                          }`}
+                        >
+                          <span className="truncate">{cat}</span>
+                          <span className={`text-[11px] font-mono ml-2 shrink-0 ${isSelected ? "text-blue-600 font-bold" : "text-slate-400"}`}>
+                            ({categoryCounts[cat]})
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 
@@ -212,26 +217,32 @@ export default function ProductsPage() {
                 <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-3">
                   Sector / Application
                 </div>
-                <ul className="space-y-2 text-xs">
+                <ul className="space-y-1 text-xs">
                   {[
                     { id: "Education", label: "Education & STEAM" },
                     { id: "University", label: "University Research" },
                     { id: "Healthcare", label: "Hospital & Pathology" },
                     { id: "Industrial", label: "Industrial QC / R&D" },
                     { id: "Cleanroom", label: "Cleanroom Facility" }
-                  ].map((sec) => (
-                    <li key={sec.id}>
-                      <label className="flex items-center gap-2.5 text-slate-600 hover:text-slate-900 cursor-pointer py-0.5">
-                        <input
-                          type="checkbox"
-                          checked={selectedSectors.includes(sec.id)}
-                          onChange={() => toggleSector(sec.id)}
-                          className="w-4 h-4 rounded text-blue-600 accent-blue-600 cursor-pointer"
-                        />
-                        <span className="font-medium">{sec.label}</span>
-                      </label>
-                    </li>
-                  ))}
+                  ].map((sec) => {
+                    const isSelected = selectedSectors.includes(sec.id);
+                    return (
+                      <li key={sec.id}>
+                        <button
+                          type="button"
+                          onClick={() => toggleSector(sec.id)}
+                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all ${
+                            isSelected
+                              ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
+                              : "text-slate-600 hover:text-[#040C1A] hover:bg-slate-100/80 font-medium"
+                          }`}
+                        >
+                          <span>{sec.label}</span>
+                          {isSelected && <i className="fa-solid fa-check text-[11px] text-blue-600"></i>}
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 
@@ -240,25 +251,31 @@ export default function ProductsPage() {
                 <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-3">
                   Worktop & Material
                 </div>
-                <ul className="space-y-2 text-xs">
+                <ul className="space-y-1 text-xs">
                   {[
                     { id: "Steel", label: "All-Steel Frame" },
                     { id: "Polypropylene", label: "Polypropylene (PP)" },
                     { id: "Stainless", label: "Stainless Steel" },
                     { id: "Resin", label: "Epoxy / Phenolic" }
-                  ].map((mat) => (
-                    <li key={mat.id}>
-                      <label className="flex items-center gap-2.5 text-slate-600 hover:text-slate-900 cursor-pointer py-0.5">
-                        <input
-                          type="checkbox"
-                          checked={selectedMaterials.includes(mat.id)}
-                          onChange={() => toggleMaterial(mat.id)}
-                          className="w-4 h-4 rounded text-blue-600 accent-blue-600 cursor-pointer"
-                        />
-                        <span className="font-medium">{mat.label}</span>
-                      </label>
-                    </li>
-                  ))}
+                  ].map((mat) => {
+                    const isSelected = selectedMaterials.includes(mat.id);
+                    return (
+                      <li key={mat.id}>
+                        <button
+                          type="button"
+                          onClick={() => toggleMaterial(mat.id)}
+                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all ${
+                            isSelected
+                              ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
+                              : "text-slate-600 hover:text-[#040C1A] hover:bg-slate-100/80 font-medium"
+                          }`}
+                        >
+                          <span>{mat.label}</span>
+                          {isSelected && <i className="fa-solid fa-check text-[11px] text-blue-600"></i>}
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 
@@ -451,23 +468,28 @@ export default function ProductsPage() {
                 <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-3">
                   Primary Category
                 </div>
-                <ul className="space-y-2.5 text-xs">
-                  {categories.map((cat) => (
-                    <li key={cat}>
-                      <label className="flex items-center justify-between text-slate-700 hover:text-slate-950 cursor-pointer py-1">
-                        <div className="flex items-center gap-3">
-                          <input
-                            type="checkbox"
-                            checked={selectedCategories.includes(cat)}
-                            onChange={() => toggleCategory(cat)}
-                            className="w-4 h-4 rounded text-blue-600 accent-blue-600 cursor-pointer"
-                          />
+                <ul className="space-y-1.5 text-xs">
+                  {categories.map((cat) => {
+                    const isSelected = selectedCategories.includes(cat);
+                    return (
+                      <li key={cat}>
+                        <button
+                          type="button"
+                          onClick={() => toggleCategory(cat)}
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all ${
+                            isSelected
+                              ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
+                              : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/80 font-medium"
+                          }`}
+                        >
                           <span className="font-medium text-xs sm:text-sm">{cat}</span>
-                        </div>
-                        <span className="text-[11px] text-slate-400 font-mono">({categoryCounts[cat]})</span>
-                      </label>
-                    </li>
-                  ))}
+                          <span className={`text-[11px] font-mono ml-2 shrink-0 ${isSelected ? "text-blue-600 font-bold" : "text-slate-400"}`}>
+                            ({categoryCounts[cat]})
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 
@@ -476,26 +498,32 @@ export default function ProductsPage() {
                 <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-3">
                   Sector / Application
                 </div>
-                <ul className="space-y-2.5 text-xs">
+                <ul className="space-y-1.5 text-xs">
                   {[
                     { id: "Education", label: "Education & STEAM" },
                     { id: "University", label: "University Research" },
                     { id: "Healthcare", label: "Hospital & Pathology" },
                     { id: "Industrial", label: "Industrial QC / R&D" },
                     { id: "Cleanroom", label: "Cleanroom Facility" }
-                  ].map((sec) => (
-                    <li key={sec.id}>
-                      <label className="flex items-center gap-3 text-slate-700 hover:text-slate-950 cursor-pointer py-1">
-                        <input
-                          type="checkbox"
-                          checked={selectedSectors.includes(sec.id)}
-                          onChange={() => toggleSector(sec.id)}
-                          className="w-4 h-4 rounded text-blue-600 accent-blue-600 cursor-pointer"
-                        />
-                        <span className="font-medium text-xs sm:text-sm">{sec.label}</span>
-                      </label>
-                    </li>
-                  ))}
+                  ].map((sec) => {
+                    const isSelected = selectedSectors.includes(sec.id);
+                    return (
+                      <li key={sec.id}>
+                        <button
+                          type="button"
+                          onClick={() => toggleSector(sec.id)}
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all ${
+                            isSelected
+                              ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
+                              : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/80 font-medium"
+                          }`}
+                        >
+                          <span className="font-medium text-xs sm:text-sm">{sec.label}</span>
+                          {isSelected && <i className="fa-solid fa-check text-[11px] text-blue-600"></i>}
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 
@@ -504,25 +532,31 @@ export default function ProductsPage() {
                 <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#040C1A] mb-3">
                   Worktop & Material
                 </div>
-                <ul className="space-y-2.5 text-xs">
+                <ul className="space-y-1.5 text-xs">
                   {[
                     { id: "Steel", label: "All-Steel Frame" },
                     { id: "Polypropylene", label: "Polypropylene (PP)" },
                     { id: "Stainless", label: "Stainless Steel" },
                     { id: "Resin", label: "Epoxy / Phenolic" }
-                  ].map((mat) => (
-                    <li key={mat.id}>
-                      <label className="flex items-center gap-3 text-slate-700 hover:text-slate-950 cursor-pointer py-1">
-                        <input
-                          type="checkbox"
-                          checked={selectedMaterials.includes(mat.id)}
-                          onChange={() => toggleMaterial(mat.id)}
-                          className="w-4 h-4 rounded text-blue-600 accent-blue-600 cursor-pointer"
-                        />
-                        <span className="font-medium text-xs sm:text-sm">{mat.label}</span>
-                      </label>
-                    </li>
-                  ))}
+                  ].map((mat) => {
+                    const isSelected = selectedMaterials.includes(mat.id);
+                    return (
+                      <li key={mat.id}>
+                        <button
+                          type="button"
+                          onClick={() => toggleMaterial(mat.id)}
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all ${
+                            isSelected
+                              ? "bg-blue-50 text-blue-700 font-bold border border-blue-200/80 shadow-xs"
+                              : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/80 font-medium"
+                          }`}
+                        >
+                          <span className="font-medium text-xs sm:text-sm">{mat.label}</span>
+                          {isSelected && <i className="fa-solid fa-check text-[11px] text-blue-600"></i>}
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 

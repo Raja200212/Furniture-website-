@@ -30,7 +30,7 @@ export default function SolutionsPage() {
         "Impact-Resistant Rounded Edges"
       ],
       btnLabel: "Inquire for School Fitout",
-      image: "https://spacevisionlabs.com/images/school-laboratory-2.jpg",
+      image: "/school-lab.jpg",
       reverse: false
     },
     {
@@ -45,7 +45,7 @@ export default function SolutionsPage() {
         "Heavy Instrument Load Capacity"
       ],
       btnLabel: "Inquire for University Labs",
-      image: "https://spacevisionlabs.com/images/h-frame-lab-bench-2.jpg",
+      image: "/university-lab.jpg",
       reverse: true
     },
     {
@@ -60,7 +60,7 @@ export default function SolutionsPage() {
         "Vibration-Free Precision Microtome Stands"
       ],
       btnLabel: "Inquire for Healthcare Labs",
-      image: "https://spacevisionlabs.com/images/pathology-workstation.jpg",
+      image: "/healthcare-lab.jpg",
       reverse: false
     },
     {
@@ -75,7 +75,7 @@ export default function SolutionsPage() {
         "Overhead Gas & High-Power Spines"
       ],
       btnLabel: "Inquire for Industrial Labs",
-      image: "https://spacevisionlabs.com/images/pp-lab-bench-4.jpg",
+      image: "/industrial-lab.jpg",
       reverse: true
     }
   ];

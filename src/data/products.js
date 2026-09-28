@@ -31,34 +31,6 @@ export const products = [
     "featured": true
   },
   {
-    "id": 3,
-    "slug": "20gp-container-laboratory1",
-    "name": "20gp Container Laboratory1",
-    "category": "Container Laboratories",
-    "image": "https://spacevisionlabs.com/images/20gp-container-laboratory1.jpg",
-    "description": "Modular laboratory environments designed around deployable container-based spaces.",
-    "tags": [
-      "20gp",
-      "container",
-      "laboratory1"
-    ],
-    "featured": true
-  },
-  {
-    "id": 4,
-    "slug": "40hq-container-laboratory1",
-    "name": "40hq Container Laboratory1",
-    "category": "Container Laboratories",
-    "image": "https://spacevisionlabs.com/images/40hq-container-laboratory1.jpg",
-    "description": "Modular laboratory environments designed around deployable container-based spaces.",
-    "tags": [
-      "40hq",
-      "container",
-      "laboratory1"
-    ],
-    "featured": true
-  },
-  {
     "id": 5,
     "slug": "60gal-227l-ventilated-flammable-storage-cabinet",
     "name": "60gal 227l Ventilated Flammable Storage Cabinet",
@@ -484,41 +456,6 @@ export const products = [
       "dental",
       "lab",
       "tables"
-    ],
-    "featured": false
-  },
-  {
-    "id": 34,
-    "slug": "dt-04-dental-office-lab-table-furniture",
-    "name": "DT 04 Dental Office Lab Table Furniture",
-    "category": "Dental Furniture",
-    "image": "https://spacevisionlabs.com/images/dt-04-dental-office-lab-table-furniture.jpg",
-    "description": "Purpose-built furniture and workstations for dental laboratory environments.",
-    "tags": [
-      "dt",
-      "04",
-      "dental",
-      "office",
-      "lab",
-      "table",
-      "furniture"
-    ],
-    "featured": false
-  },
-  {
-    "id": 35,
-    "slug": "dt-05-dental-lab-work-bench",
-    "name": "DT 05 Dental Lab Work Bench",
-    "category": "Dental Furniture",
-    "image": "https://spacevisionlabs.com/images/dt-05-dental-lab-work-bench.jpg",
-    "description": "Purpose-built furniture and workstations for dental laboratory environments.",
-    "tags": [
-      "dt",
-      "05",
-      "dental",
-      "lab",
-      "work",
-      "bench"
     ],
     "featured": false
   },
@@ -1326,20 +1263,6 @@ export const products = [
     "tags": [
       "laboratory",
       "sinks"
-    ],
-    "featured": false
-  },
-  {
-    "id": 90,
-    "slug": "laboratory-trespa-worktop",
-    "name": "Laboratory TRESPA Worktop",
-    "category": "Worktops & Materials",
-    "image": "https://spacevisionlabs.com/images/laboratory-trespa-worktop.jpg",
-    "description": "Laboratory work surfaces and material systems selected for demanding working environments.",
-    "tags": [
-      "laboratory",
-      "trespa",
-      "worktop"
     ],
     "featured": false
   },
@@ -2197,5 +2120,121 @@ export const products = [
       "cupboard"
     ],
     "featured": false
+  },
+  {
+    "id": 149,
+    "slug": "granite-worktop",
+    "name": "Granite Worktop",
+    "category": "Worktops & Surfaces",
+    "image": "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
+    "description": "Heavy and dense natural stone surface finished with safe rounded edges. Best for areas with heavy testing, high static load capacity, or where sensitive precision analytical balance scales require zero-vibration steady platforms.",
+    "tags": [
+      "granite",
+      "worktop",
+      "balance-table",
+      "stone",
+      "anti-vibration",
+      "countertop"
+    ],
+    "featured": true
+  },
+  {
+    "id": 150,
+    "slug": "trespa-worktop",
+    "name": "TRESPA Worktop",
+    "category": "Worktops & Surfaces",
+    "image": "https://spacevisionlabs.com/images/laboratory-trespa-worktop.jpg",
+    "description": "Advanced thermosetting resin and natural fiber construction providing superior impact resistance, thermal resilience, chemical stability, and moisture impermeability for modern laboratory benches.",
+    "tags": [
+      "trespa",
+      "worktop",
+      "phenolic",
+      "toplab",
+      "chemical-resistant"
+    ],
+    "featured": true
+  },
+  {
+    "id": 151,
+    "slug": "epoxy-resin",
+    "name": "Epoxy Resin Worktop",
+    "category": "Worktops & Surfaces",
+    "image": "https://spacevisionlabs.com/images/laboratory-countertops-2.png",
+    "description": "Solid, monolithic composition highly resistant to aggressive chemicals, boiling acids, direct thermal shock, and staining. Fitted with marine drip-grooves, making it the industry standard for chemical testing laboratories.",
+    "tags": [
+      "epoxy",
+      "resin",
+      "worktop",
+      "countertop",
+      "acid-proof",
+      "monolithic"
+    ],
+    "featured": true
+  },
+  {
+    "id": 152,
+    "slug": "stainless-steel-worktop",
+    "name": "Stainless Steel Worktop",
+    "category": "Worktops & Surfaces",
+    "image": "https://spacevisionlabs.com/images/stainless_countertop.jpg",
+    "description": "Rust-proof sanitary medical-grade stainless steel (SS 304 / SS 316) top that accommodates seamless welded sinks and marine edges. Extremely easy to wash down and disinfect for clinical, pharmaceutical, and biological cleanroom environments.",
+    "tags": [
+      "stainless-steel",
+      "ss304",
+      "ss316",
+      "worktop",
+      "sanitary",
+      "cleanroom"
+    ],
+    "featured": true
+  },
+  {
+    "id": 153,
+    "slug": "ceramic-worktop",
+    "name": "Ceramic Worktop",
+    "category": "Worktops & Surfaces",
+    "image": "https://spacevisionlabs.com/images/ceramic-worktop-2.jpg",
+    "description": "Scratch-proof sintered ceramic slabs joined with chemical-resistant grout. Offers exceptional defense against corrosive boiling acids, sharp dissecting instruments, high temperatures, and harsh cleaning agents.",
+    "tags": [
+      "ceramic",
+      "worktop",
+      "countertop",
+      "scratch-proof",
+      "fire-proof"
+    ],
+    "featured": true
+  },
+  {
+    "id": 154,
+    "slug": "laminated-worktop",
+    "name": "Laminated Worktop",
+    "category": "Worktops & Surfaces",
+    "image": "https://spacevisionlabs.com/images/phenolic-resin-countertop-3.jpg",
+    "description": "Economical high-pressure decorative laminate on moisture-resistant substrate for dry analysis, physics laboratories, school IT classrooms, and administrative prep stations.",
+    "tags": [
+      "laminated",
+      "hpl",
+      "worktop",
+      "countertop",
+      "dry-lab"
+    ],
+    "featured": true
+  },
+  {
+    "id": 155,
+    "slug": "polypropylene-worktop",
+    "name": "Polypropylene (PP) Worktop",
+    "category": "Worktops & Surfaces",
+    "image": "https://spacevisionlabs.com/images/school-laboratory-2.jpg",
+    "description": "100% rust-free, zero-corrosion thermoplastic structure. Total resistance to hydrofluoric acid (HF), concentrated hydrochloric acid, aqua regia, and harsh wet chemistry.",
+    "tags": [
+      "polypropylene",
+      "pp",
+      "worktop",
+      "countertop",
+      "acid-proof",
+      "hydrofluoric"
+    ],
+    "featured": true
   }
 ];

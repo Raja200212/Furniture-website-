@@ -28,7 +28,7 @@ export default function Hero({ onOpenQuote }) {
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl">
-              Precision-crafted modular workstations, chemical-grade fume containment hoods, sterile cleanrooms, and deployable container laboratories. Certified for education, healthcare diagnostics, and pharmaceutical R&D.
+              Precision-crafted modular workstations, chemical-grade fume containment hoods, sterile cleanrooms, and turnkey scientific facilities. Certified for education, healthcare diagnostics, and pharmaceutical R&D.
             </p>
 
             {/* CTAs */}
