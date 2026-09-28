@@ -59,7 +59,7 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                 </div>
                 <div className="flex justify-between py-1 border-b border-slate-200/60">
                   <span className="text-slate-500 font-medium">Compliance</span>
-                  <span className="text-slate-800 font-bold">SEFA-8 / ISO 9001:2015</span>
+                  <span className="text-slate-800 font-bold">ISO 9001:2015 Certified</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-slate-200/60">
                   <span className="text-slate-500 font-medium">Customization</span>

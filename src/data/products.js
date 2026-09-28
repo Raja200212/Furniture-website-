@@ -197,7 +197,7 @@ export const products = [
     "slug": "anti-vibration-balance-table",
     "name": "Anti Vibration Balance Table",
     "category": "Specialised Furniture",
-    "image": "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
+    "image": "https://spacevisionlabs.com/images/anti-vibration-table-bt-01.jpg",
     "description": "Specialised laboratory furniture and support equipment for precision and demanding workflows.",
     "tags": [
       "anti",
@@ -2123,20 +2123,19 @@ export const products = [
   },
   {
     "id": 149,
-    "slug": "granite-worktop",
-    "name": "Granite Worktop",
+    "slug": "solid-phenolic-worktop",
+    "name": "Solid Phenolic Chemical Worktop",
     "category": "Worktops & Materials",
-    "image": "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
-    "description": "Heavy and dense natural stone surface finished with safe rounded edges. Best for areas with heavy testing, high static load capacity, or where sensitive precision analytical balance scales require zero-vibration steady platforms.",
+    "image": "https://spacevisionlabs.com/images/laboratory-trespa-worktop.jpg",
+    "description": "Solid chemical-resistant phenolic compact laminate worktop engineered for demanding laboratory workstations.",
     "tags": [
-      "granite",
+      "phenolic",
       "worktop",
-      "balance-table",
-      "stone",
-      "anti-vibration",
+      "trespa",
+      "chemical-resistant",
       "countertop"
     ],
-    "featured": true
+    "featured": false
   },
   {
     "id": 150,

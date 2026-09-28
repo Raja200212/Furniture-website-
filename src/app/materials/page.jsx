@@ -64,7 +64,7 @@ export default function MaterialsPage() {
       id: "worktops",
       title: "Worktop & Countertop Materials",
       image: "https://spacevisionlabs.com/images/laboratory-trespa-worktop.jpg",
-      desc: "Heavy natural stone granite, chemical-resistant TRESPA, pure epoxy resin, and sintered ceramic work surfaces designed to withstand aggressive thermal and chemical stress demands.",
+      desc: "Chemical-resistant TRESPA TopLab, pure monolithic epoxy resin, sintered ceramic, and grade 316 stainless steel surfaces designed to withstand aggressive thermal and chemical stress demands.",
       link: "/materials/worktop-materials"
     },
     {
@@ -146,7 +146,7 @@ export default function MaterialsPage() {
     {
       id: "stainless-steel",
       title: "Stainless Steel",
-      image: "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
+      image: "https://spacevisionlabs.com/images/floor-mounted-lab-sink-cabinet-2.jpg",
       desc: "Grade 304/316 seamless stainless steel work surfaces and cabinetry offering optimal sanitary performance, heat resistance, and easy biological decontamination.",
       link: "/materials/stainless-steel"
     },

@@ -61,7 +61,7 @@ export default function ServicesPage() {
       points: [
         "AutoCAD 2D technical layout drafts",
         "Photorealistic 3D virtual lab walk-throughs",
-        "SEFA-8 workflow & cleanroom zoning validation"
+        "Ergonomic workflow & cleanroom zoning validation"
       ]
     },
     {
@@ -83,7 +83,7 @@ export default function ServicesPage() {
       title: "Manufacturing & Quality Control",
       image: "/turnkey-manufacture.jpg",
       badge: "Fabrication",
-      desc: "In-house CNC sheet metal stamping, welding, epoxy powder coating, and precision assembly adhering to SEFA-8 standards.",
+      desc: "In-house CNC sheet metal stamping, welding, epoxy powder coating, and precision assembly adhering to ISO 9001:2015 quality standards.",
       points: [
         "Fiber laser CNC cutting & robotic welding",
         "7-tank anti-corrosion chemical pre-treatment",
@@ -190,8 +190,8 @@ export default function ServicesPage() {
                     <div className="text-[11px] text-slate-400">In-House Production</div>
                   </div>
                   <div>
-                    <div className="text-lg sm:text-xl font-mono font-extrabold text-cyan-400">SEFA-8</div>
-                    <div className="text-[11px] text-slate-400">Standard Compliant</div>
+                    <div className="text-lg sm:text-xl font-mono font-extrabold text-cyan-400">ISO 9001</div>
+                    <div className="text-[11px] text-slate-400">Certified Quality</div>
                   </div>
                   <div>
                     <div className="text-lg sm:text-xl font-mono font-extrabold text-cyan-400">2D / 3D</div>

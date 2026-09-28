@@ -25,7 +25,7 @@ export default function AboutPage() {
     {
       num: "03",
       title: "Accurate BOQ Support",
-      desc: "Itemized Bill of Quantities with clear material specifications, load capacities, and SEFA-8/ISO compliant performance ratings."
+      desc: "Itemized Bill of Quantities with clear material specifications, load capacities, and ISO 9001:2015 compliant performance ratings."
     },
     {
       num: "04",
@@ -152,7 +152,7 @@ export default function AboutPage() {
                 Partner with Certified Laboratory Engineers
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-xl">
-                From room dimension audit to turnkey equipment handover, our technical specialists ensure strict SEFA-8 and ISO compliance.
+                From room dimension audit to turnkey equipment handover, our technical specialists ensure strict ISO 9001 and quality compliance.
               </p>
             </div>
 

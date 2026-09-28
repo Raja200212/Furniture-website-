@@ -195,10 +195,10 @@ export const categoryLandings = {
     slug: "worktop-materials",
     title: "Worktop & Countertop Materials",
     heroImage: "https://spacevisionlabs.com/images/laboratory-trespa-worktop.jpg",
-    heroDesc: "Heavy natural stone granite, chemical-resistant TRESPA, pure epoxy resin, and sintered ceramic work surfaces designed to withstand aggressive thermal and chemical stress demands.",
+    heroDesc: "Chemical-resistant TRESPA TopLab, pure monolithic epoxy resin, and sintered ceramic work surfaces designed to withstand aggressive thermal and chemical stress demands.",
     mainCategory: "Worktops & Materials",
     targetCatalogLink: "/products?category=Worktops%20%26%20Materials",
-    overviewText: "Precision-milled worktop surfaces tested under SEFA-3 standards for 24-hour chemical reagent resistance, scratch tolerance, non-porous hygiene, and continuous thermal load handling.",
+    overviewText: "Precision-milled worktop surfaces tested under international laboratory standards for 24-hour chemical reagent resistance, scratch tolerance, non-porous hygiene, and continuous thermal load handling.",
     subcategories: [
       {
         id: "trespa-toplab",
@@ -215,10 +215,10 @@ export const categoryLandings = {
         link: "/products?category=Worktops%20%26%20Materials&search=Epoxy"
       },
       {
-        id: "ceramic-granite-tops",
-        title: "Ceramic & Natural Granite Tops",
+        id: "ceramic-stainless-tops",
+        title: "Sintered Ceramic & Stainless Tops",
         image: "https://spacevisionlabs.com/images/c-frame-lab-bench-2.jpg",
-        desc: "Extreme thermal shock resistant sintered ceramic and 30mm heavy granite for analytical balances.",
+        desc: "Extreme thermal shock resistant sintered ceramic and grade 316 stainless steel analytical worktops.",
         link: "/products?category=Worktops%20%26%20Materials"
       }
     ]
@@ -273,9 +273,9 @@ export const categoryLandings = {
       },
       {
         id: "anti-vibration-tables",
-        title: "Anti-Vibration Balance Tables",
-        image: "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
-        desc: "Heavy isolated granite core with vibration-damping dampeners for micro-analytical precision balances.",
+        title: "Analytical Balance Workstations",
+        image: "https://spacevisionlabs.com/images/c-frame-lab-bench-2.jpg",
+        desc: "Heavy vibration-isolated damping balance workstations engineered for micro-analytical precision balances.",
         link: "/products?category=Specialised%20Furniture"
       },
       {
@@ -377,8 +377,8 @@ export const categoryLandings = {
       {
         id: "balance-platforms",
         title: "Micro-Analytical Balance Stations",
-        image: "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
-        desc: "Isolated concrete and granite vibration dampers for sub-milligram mass measurements.",
+        image: "https://spacevisionlabs.com/images/c-frame-lab-bench-2.jpg",
+        desc: "Isolated precision vibration dampers for sub-milligram mass measurements.",
         link: "/products?sector=University"
       }
     ]
@@ -402,7 +402,7 @@ export const categoryLandings = {
       {
         id: "stainless-cabinets",
         title: "Stainless Steel Medical Casework",
-        image: "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
+        image: "https://spacevisionlabs.com/images/floor-mounted-lab-sink-cabinet-2.jpg",
         desc: "Grade 304/316 seamless medical storage cabinets with sloped sanitary tops.",
         link: "/products?sector=Healthcare"
       },
@@ -473,7 +473,7 @@ export const categoryLandings = {
       {
         id: "cleanroom-benches",
         title: "Perforated Stainless Steel Benches",
-        image: "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
+        image: "https://spacevisionlabs.com/images/floor-mounted-lab-sink-cabinet-2.jpg",
         desc: "Aerodynamically perforated work surfaces engineered for unobstructed laminar airflow.",
         link: "/products?category=Cleanroom"
       }
@@ -546,7 +546,7 @@ export const categoryLandings = {
   "stainless-steel": {
     slug: "stainless-steel",
     title: "Stainless Steel Grade 304 / 316",
-    heroImage: "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
+    heroImage: "https://spacevisionlabs.com/images/c-frame-lab-bench-2.jpg",
     heroDesc: "Grade 304/316 seamless stainless steel work surfaces and cabinetry offering optimal sanitary performance, heat resistance, and easy biological decontamination.",
     mainCategory: "Lab Benches & Workstations",
     targetCatalogLink: "/products?material=Stainless",
@@ -555,7 +555,7 @@ export const categoryLandings = {
       {
         id: "ss-worktables",
         title: "304/316 Stainless Steel Worktables",
-        image: "https://spacevisionlabs.com/images/anti-vibration-balance-table.png",
+        image: "https://spacevisionlabs.com/images/floor-mounted-lab-sink-cabinet-2.jpg",
         desc: "Heavy-duty welded tubular leg frames with sound-deadened marine edge stainless tops.",
         link: "/products?material=Stainless"
       },

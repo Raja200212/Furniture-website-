@@ -62,8 +62,8 @@ export default function Hero({ onOpenQuote }) {
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-blue-600 shrink-0" />
                 <div>
-                  <div className="text-xs font-bold text-slate-800">SEFA-8 Tested</div>
-                  <div className="text-[11px] text-slate-500">Heavy Load Rating</div>
+                  <div className="text-xs font-bold text-slate-800">Heavy-Duty Tested</div>
+                  <div className="text-[11px] text-slate-500">500kg Load Rating</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">

@@ -37,7 +37,7 @@ export default function Footer({ onOpenQuote }) {
 
             <div className="flex items-center gap-2 text-xs text-slate-300">
               <ShieldCheck className="w-4 h-4 text-blue-400" />
-              <span>ISO 9001:2015 & SEFA-8 Compliant Manufacturing</span>
+              <span>ISO 9001:2015 Certified Manufacturing</span>
             </div>
           </div>
 
@@ -117,8 +117,7 @@ export default function Footer({ onOpenQuote }) {
             © {new Date().getFullYear()} Space Vision Lab Private Limited. All Rights Reserved.
           </div>
           <div className="flex items-center gap-6">
-            <span>SEFA-8 Verified</span>
-            <span>ISO 9001:2015</span>
+            <span>ISO 9001:2015 Certified</span>
             <Link href="/contact" className="hover:text-slate-300">Contact Us</Link>
           </div>
         </div>

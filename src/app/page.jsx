@@ -123,7 +123,7 @@ const turnkeySteps = [
     points: [
       "CNC laser cutting & robotic welding lines",
       "7-tank anti-rust pre-treatment & pure epoxy",
-      "SEFA-8 load compliance & QA verification"
+      "Structural load compliance & QA verification"
     ]
   },
   {
@@ -751,41 +751,41 @@ export default function HomePage() {
 
             <div className="max-w-xl mx-auto">
               <Link 
-                href="/products/granite-worktop" 
+                href="/products?category=Worktops%20%26%20Materials" 
                 className="bg-[#F4F8FC] hover:bg-white rounded-3xl border border-slate-200 hover:border-blue-500 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer"
               >
                 <div>
-                  <div className="h-64 sm:h-72 w-full overflow-hidden bg-slate-100 relative">
+                  <div className="h-64 sm:h-72 w-full overflow-hidden bg-slate-100 relative flex items-center justify-center p-6">
                     <img 
-                      src="https://spacevisionlabs.com/images/anti-vibration-balance-table.png" 
-                      alt="Granite Worktop" 
-                      className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      src="https://spacevisionlabs.com/images/laboratory-trespa-worktop.jpg" 
+                      alt="TRESPA TopLab Worktop" 
+                      className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" 
                     />
                   </div>
                   <div className="p-6 sm:p-8">
                     <div className="inline-block px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100 font-mono text-[10px] font-bold uppercase tracking-wider mb-2.5">
-                      NATURAL STONE
+                      CHEMICAL RESISTANT PHENOLIC
                     </div>
                     <h3 className="text-xl sm:text-2xl font-extrabold text-[#040C1A] group-hover:text-blue-600 transition-colors mb-2 flex items-center justify-between">
-                      <span>Granite Worktop</span>
+                      <span>TRESPA TopLab® / Solid Epoxy Worktop</span>
                       <ArrowRight className="w-5 h-5 text-blue-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                     </h3>
                     <p className="text-sm text-slate-600 leading-relaxed mb-4">
-                      Heavy and dense natural stone surface finished with safe rounded edges. Best for areas with heavy testing, high static load capacity, or where sensitive analytical balances need a steady, zero-vibration surface.
+                      High-performance monolithic epoxy and solid phenolic resin surfaces engineered with electron-beam curing for supreme resistance against 140+ acids, alkalis, stains, moisture, and high thermal stress.
                     </p>
                     <div className="flex flex-wrap gap-2 text-xs font-semibold text-slate-600 mb-2">
-                      <span className="bg-white border border-slate-200 px-3 py-1 rounded-lg">Vibration-Damping</span>
-                      <span className="bg-white border border-slate-200 px-3 py-1 rounded-lg">Polished Beveled Edge</span>
-                      <span className="bg-white border border-slate-200 px-3 py-1 rounded-lg">Heavy Load Support</span>
+                      <span className="bg-white border border-slate-200 px-3 py-1 rounded-lg">Acid & Solvent Proof</span>
+                      <span className="bg-white border border-slate-200 px-3 py-1 rounded-lg">Non-Porous Hygiene</span>
+                      <span className="bg-white border border-slate-200 px-3 py-1 rounded-lg">Impact & Thermal Endurance</span>
                     </div>
                   </div>
                 </div>
                 <div className="px-6 sm:px-8 pb-6 pt-0 flex items-center justify-between">
                   <span className="text-xs font-bold text-blue-600 inline-flex items-center gap-1.5 group-hover:underline">
-                    View Product Details <ArrowRight className="w-4 h-4" />
+                    View Worktop Products <ArrowRight className="w-4 h-4" />
                   </span>
                   <span className="text-xs font-semibold text-slate-400">
-                    Explore all surfaces in <Link href="/materials" className="text-blue-600 underline hover:text-blue-700">Materials</Link>
+                    Explore all surfaces in <span className="text-blue-600 font-medium">Worktops & Materials</span>
                   </span>
                 </div>
               </Link>

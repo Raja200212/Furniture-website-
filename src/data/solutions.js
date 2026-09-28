@@ -99,7 +99,7 @@ export const workstationSystems = [
 export const stats = [
   { value: "140+", label: "Specialized Lab Products", sub: "Modular benches, hoods & storage" },
   { value: "500+", label: "Turnkey Installations", sub: "Universities, pharma & hospitals" },
-  { value: "15+", label: "Years of Engineering", sub: "ISO 9001 & SEFA-8 compliant" },
+  { value: "15+", label: "Years of Engineering", sub: "ISO 9001:2015 certified quality" },
   { value: "100%", label: "Custom Configurable", sub: "3D CAD & tailored manufacturing" }
 ];
 
@@ -137,7 +137,7 @@ export const processSteps = [
     points: [
       "CNC laser cutting & robotic welding lines",
       "7-tank anti-rust pre-treatment & pure epoxy",
-      "SEFA-8 load compliance & QA verification"
+      "Structural load compliance & QA verification"
     ]
   },
   {

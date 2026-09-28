@@ -35,7 +35,7 @@ export default function LabConfigurator({ onConfigureQuote }) {
     { id: "faucet-sink", label: "3-Way Gooseneck Water Tap & PP Cup Sink", badge: "Plumbing" },
     { id: "gas-turret", label: "Twin Gas / Vacuum / Compressed Air Turret", badge: "Gases" },
     { id: "drawer-pedestal", label: "Under-Bench 3-Drawer Steel Pedestal Unit", badge: "Storage" },
-    { id: "anti-vibration", label: "Integrated Granite Anti-Vibration Balance Pad", badge: "Precision" },
+    { id: "anti-vibration", label: "Integrated Anti-Vibration Precision Balance Pad", badge: "Precision" },
     { id: "eyewash", label: "Bench-Mounted Pull-Out Emergency Eye Wash", badge: "Safety" }
   ];
 
