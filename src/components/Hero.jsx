@@ -1,151 +1,258 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowRight, Sliders, ShieldCheck, Sparkles, CheckCircle2, Award, Zap } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { 
+  Compass, MapPin, Calendar, Users, ArrowRight, ShieldCheck, 
+  Sparkles, Star, Award, ChevronRight, Play, CheckCircle2
+} from "lucide-react";
 
-export default function Hero({ onOpenQuote }) {
+const HERO_SLIDES = [
+  {
+    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=85",
+    title: "Silent Lagoons & Backwaters",
+    location: "Alleppey & Kumarakom",
+    tagline: "Glide through emerald waterways on a handcrafted luxury Kettuvallam"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1920&q=85",
+    title: "Misty Tea Hills & Cascades",
+    location: "Munnar & Western Ghats",
+    tagline: "Awaken to rolling clouds, aromatic cardamom forests, and cool mountain sunrises"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1920&q=85",
+    title: "Laterite Cliffs & Sacred Sea",
+    location: "Varkala & Kovalam Beaches",
+    tagline: "Experience breathtaking Arabian Sea sunsets from dramatic cliff-top yoga cafes"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1920&q=85",
+    title: "5000-Year Spice & Art Heritage",
+    location: "Fort Kochi & Mattancherry",
+    tagline: "Discover historic Chinese fishing nets, Kathakali dance rituals, and ancient spice bazaars"
+  }
+];
+
+export default function Hero({ onOpenBooking, onSelectDestination }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedDest, setSelectedDest] = useState("all");
+  const [travelMonth, setTravelMonth] = useState("Oct-Nov");
+  const [guests, setGuests] = useState("2 Adults");
+  const [tripType, setTripType] = useState("Honeymoon & Luxury");
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleQuickSearch = (e) => {
+    e.preventDefault();
+    if (onOpenBooking) {
+      onOpenBooking({
+        type: "search",
+        destination: selectedDest,
+        month: travelMonth,
+        guests: guests,
+        tripType: tripType
+      });
+    }
+  };
+
   return (
-    <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden tech-grid-bg bg-gradient-to-b from-blue-50/40 via-white to-slate-50">
-      {/* Background ambient decorative orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-blue-400/10 to-cyan-300/10 rounded-full blur-3xl pointer-events-none -z-10" />
+    <div className="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-between pt-24 pb-12 overflow-hidden text-white">
+      {/* Background Image Carousel with Smooth Crossfade */}
+      <div className="absolute inset-0 z-0">
+        {HERO_SLIDES.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+            } transition-transform duration-[7000ms]`}
+            style={{
+              backgroundImage: `url(${slide.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center"
+            }}
+          />
+        ))}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        {/* Cinematic Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/60 to-emerald-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-950/50 to-transparent" />
+      </div>
+
+      {/* Main Hero Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-center my-auto">
+        <div className="max-w-3xl space-y-6">
           
-          {/* Left Hero Content */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-extrabold uppercase tracking-wider mb-6 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-blue-600 animate-pulse" />
-              <span>Smart • Durable • Functional Lab Systems</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0A1C38] tracking-tight leading-[1.1] mb-6">
-              Next-Gen Laboratory{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-600">
-                Furniture & Cleanroom
-              </span>{" "}
-              Engineering.
-            </h1>
-
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl">
-              Precision-crafted modular workstations, chemical-grade fume containment hoods, sterile cleanrooms, and turnkey scientific facilities. Certified for education, healthcare diagnostics, and pharmaceutical R&D.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 mb-10 w-full sm:w-auto">
-              <button
-                onClick={() => onOpenQuote()}
-                className="flex items-center justify-center gap-2 bg-[#0A1C38] hover:bg-blue-600 text-white font-bold px-7 py-3.5 rounded-full transition-all duration-300 shadow-lg shadow-blue-900/15 hover:shadow-blue-600/30 hover:-translate-y-0.5 cursor-pointer text-sm w-full sm:w-auto"
-              >
-                <span>Request 3D Lab Consultation</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <a
-                href="#configurator"
-                className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 font-bold px-6 py-3.5 rounded-full border border-slate-200 hover:border-blue-500 hover:text-blue-600 transition-all duration-300 text-sm shadow-xs w-full sm:w-auto"
-              >
-                <Sliders className="w-4 h-4 text-blue-600" />
-                <span>Interactive Workstation Builder</span>
-              </a>
-
-              <a
-                href="#products"
-                className="text-xs font-bold text-slate-600 hover:text-blue-600 underline underline-offset-4 px-2 py-1 transition-colors"
-              >
-                Browse 140+ Catalog Items ↓
-              </a>
-            </div>
-
-            {/* Trust badges */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 w-full max-w-lg">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-blue-600 shrink-0" />
-                <div>
-                  <div className="text-xs font-bold text-slate-800">Heavy-Duty Tested</div>
-                  <div className="text-[11px] text-slate-500">500kg Load Rating</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-blue-600 shrink-0" />
-                <div>
-                  <div className="text-xs font-bold text-slate-800">ISO 9001:2015</div>
-                  <div className="text-[11px] text-slate-500">Certified Quality</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-blue-600 shrink-0" />
-                <div>
-                  <div className="text-xs font-bold text-slate-800">Custom Built</div>
-                  <div className="text-[11px] text-slate-500">3D CAD Ready</div>
-                </div>
-              </div>
-            </div>
+          {/* Top Pill Tag */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/80 border border-emerald-500/40 backdrop-blur-md shadow-lg text-xs sm:text-sm font-medium text-amber-300 animate-in fade-in slide-in-from-bottom-2 duration-500">
+            <Sparkles className="w-4 h-4 text-amber-400" />
+            <span>National Geographic: Top 50 Must-Visit Paradises of a Lifetime</span>
           </div>
 
-          {/* Right Visual Display */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 to-[#0A1C38] p-3 shadow-2xl border border-slate-800/80">
-              
-              {/* Product Showcase Image Container */}
-              <div className="relative h-[420px] sm:h-[480px] w-full rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
-                <Image
-                  src="https://spacevisionlabs.com/images/pp-lab-bench-4.jpg"
-                  alt="Space Vision Lab Workstation Solution"
-                  fill
-                  priority
-                  className="object-cover object-center opacity-90 hover:scale-105 transition-transform duration-700"
-                />
-                
-                {/* Gradient vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#040C1A] via-transparent to-transparent opacity-80" />
+          {/* Dynamic Headline */}
+          <div className="space-y-2">
+            <p className="text-amber-400 font-serif italic text-lg sm:text-xl tracking-wide">
+              {HERO_SLIDES[currentSlide].location}
+            </p>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold tracking-tight text-white leading-[1.1] drop-shadow-md">
+              God&apos;s Own Country, <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-teal-200">
+                Awaken Your Soul.
+              </span>
+            </h1>
+          </div>
 
-                {/* Floating Tech Pill Top Right */}
-                <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-white text-[11px] font-bold tracking-wider flex items-center gap-1.5 shadow-lg">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span>MODULAR C-FRAME SERIES</span>
-                </div>
+          <p className="text-base sm:text-lg lg:text-xl text-emerald-100/90 font-light leading-relaxed max-w-2xl drop-shadow">
+            {HERO_SLIDES[currentSlide].tagline}. Curated private houseboat cruises, mist-clad tea plantations, authentic Ayurvedic rejuvenation, and tropical beaches.
+          </p>
 
-                {/* Bottom Glass Overlay Card */}
-                <div className="absolute bottom-4 left-4 right-4 bg-[#0A1C38]/90 backdrop-blur-md border border-white/15 rounded-xl p-4 text-white shadow-xl">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-extrabold text-blue-400 uppercase tracking-wider">Engineered Excellence</span>
-                    <span className="text-[11px] text-slate-300 font-mono">1000 KG LOAD CAP</span>
-                  </div>
-                  <h4 className="text-sm font-bold text-white mb-1">Heavy-Duty Chemical & Acid Resistant Benches</h4>
-                  <p className="text-xs text-slate-300 line-clamp-2">
-                    Features electrostatic anti-corrosion powder coating, TRESPA® worktops, and integrated overhead utility raceways.
-                  </p>
-                </div>
-              </div>
+          {/* Quick Action Badges */}
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            <a
+              href="#planner"
+              className="px-6 py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 text-emerald-950 font-bold text-sm sm:text-base hover:shadow-xl hover:shadow-amber-500/25 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-lg cursor-pointer"
+            >
+              <span>Build My Custom Holiday</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
 
-              {/* Floating Stat Card */}
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl border border-slate-100 hidden sm:flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 font-extrabold text-xl">
-                  15+
-                </div>
-                <div>
-                  <div className="text-xs font-extrabold text-[#0A1C38]">Years of Innovation</div>
-                  <div className="text-[11px] text-slate-500">Turnkey Lab Contracting</div>
-                </div>
-              </div>
+            <a
+              href="#packages"
+              className="px-6 py-3.5 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white font-semibold text-sm sm:text-base transition-all flex items-center gap-2"
+            >
+              <Compass className="w-4 h-4 text-amber-300" />
+              <span>Explore Curated Packages</span>
+            </a>
+          </div>
 
-              {/* Floating Stat Card Right */}
-              <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-4 shadow-xl border border-slate-100 hidden sm:flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 font-extrabold text-xl">
-                  500+
-                </div>
-                <div>
-                  <div className="text-xs font-extrabold text-[#0A1C38]">Projects Delivered</div>
-                  <div className="text-[11px] text-slate-500">Across Academic & Pharma</div>
-                </div>
-              </div>
-
+          {/* Trust Highlights */}
+          <div className="flex flex-wrap items-center gap-6 pt-4 text-xs sm:text-sm text-emerald-200/90 font-medium border-t border-emerald-700/40">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-amber-400" />
+              <span>100% Tailored Private Itineraries</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+              <span>4.9/5 Rating (12,400+ Travelers)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-teal-300" />
+              <span>Govt. Accredited Tour Operators</span>
             </div>
           </div>
 
         </div>
       </div>
-    </section>
+
+      {/* Floating Interactive Quick Search / Planner Bar */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-6">
+        <div className="bg-emerald-950/90 backdrop-blur-xl p-4 sm:p-5 rounded-3xl border border-emerald-700/60 shadow-2xl shadow-emerald-950/80">
+          <form onSubmit={handleQuickSearch} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 items-center">
+            
+            {/* Destination Select */}
+            <div className="bg-emerald-900/70 p-3 rounded-2xl border border-emerald-700/50 hover:border-amber-400/60 transition-colors">
+              <label className="text-[11px] uppercase tracking-wider text-emerald-300 font-semibold flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-amber-400" /> Destination
+              </label>
+              <select
+                value={selectedDest}
+                onChange={(e) => setSelectedDest(e.target.value)}
+                className="w-full bg-transparent text-white font-medium text-sm focus:outline-none mt-1 cursor-pointer"
+              >
+                <option value="all" className="bg-emerald-950 text-white">All Kerala (Classic Route)</option>
+                <option value="alleppey" className="bg-emerald-950 text-white">Alleppey (Backwaters)</option>
+                <option value="munnar" className="bg-emerald-950 text-white">Munnar (Tea & Mist)</option>
+                <option value="wayanad" className="bg-emerald-950 text-white">Wayanad (Wilderness)</option>
+                <option value="varkala" className="bg-emerald-950 text-white">Varkala (Cliffs & Beach)</option>
+                <option value="kochi" className="bg-emerald-950 text-white">Fort Kochi (Heritage)</option>
+                <option value="thekkady" className="bg-emerald-950 text-white">Thekkady (Periyar Safari)</option>
+              </select>
+            </div>
+
+            {/* Travel Month */}
+            <div className="bg-emerald-900/70 p-3 rounded-2xl border border-emerald-700/50 hover:border-amber-400/60 transition-colors">
+              <label className="text-[11px] uppercase tracking-wider text-emerald-300 font-semibold flex items-center gap-1">
+                <Calendar className="w-3.5 h-3.5 text-amber-400" /> When to Travel
+              </label>
+              <select
+                value={travelMonth}
+                onChange={(e) => setTravelMonth(e.target.value)}
+                className="w-full bg-transparent text-white font-medium text-sm focus:outline-none mt-1 cursor-pointer"
+              >
+                <option value="This Month" className="bg-emerald-950 text-white">This Month (Instant Plan)</option>
+                <option value="Oct-Nov" className="bg-emerald-950 text-white">October - November (Autumn)</option>
+                <option value="Dec-Jan" className="bg-emerald-950 text-white">December - January (Peak Fest)</option>
+                <option value="Feb-Apr" className="bg-emerald-950 text-white">February - April (Sunny Beach)</option>
+                <option value="Monsoon" className="bg-emerald-950 text-white">June - August (Ayurveda Monsoon)</option>
+              </select>
+            </div>
+
+            {/* Traveler Group */}
+            <div className="bg-emerald-900/70 p-3 rounded-2xl border border-emerald-700/50 hover:border-amber-400/60 transition-colors">
+              <label className="text-[11px] uppercase tracking-wider text-emerald-300 font-semibold flex items-center gap-1">
+                <Users className="w-3.5 h-3.5 text-amber-400" /> Guests
+              </label>
+              <select
+                value={guests}
+                onChange={(e) => setGuests(e.target.value)}
+                className="w-full bg-transparent text-white font-medium text-sm focus:outline-none mt-1 cursor-pointer"
+              >
+                <option value="2 Adults (Couple)" className="bg-emerald-950 text-white">2 Adults (Couple)</option>
+                <option value="Family (2 Adults + 1-2 Kids)" className="bg-emerald-950 text-white">Family (2+ Kids)</option>
+                <option value="Solo Traveler" className="bg-emerald-950 text-white">Solo Explorer</option>
+                <option value="Group / Friends (4-8 Pax)" className="bg-emerald-950 text-white">Group (4+ Pax)</option>
+              </select>
+            </div>
+
+            {/* Trip Theme */}
+            <div className="bg-emerald-900/70 p-3 rounded-2xl border border-emerald-700/50 hover:border-amber-400/60 transition-colors">
+              <label className="text-[11px] uppercase tracking-wider text-emerald-300 font-semibold flex items-center gap-1">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Experience Style
+              </label>
+              <select
+                value={tripType}
+                onChange={(e) => setTripType(e.target.value)}
+                className="w-full bg-transparent text-white font-medium text-sm focus:outline-none mt-1 cursor-pointer"
+              >
+                <option value="Honeymoon & Luxury" className="bg-emerald-950 text-white">Honeymoon & Luxury</option>
+                <option value="Backwater & Nature" className="bg-emerald-950 text-white">Backwater & Nature</option>
+                <option value="Ayurvedic Wellness & Spa" className="bg-emerald-950 text-white">Ayurveda Rejuvenation</option>
+                <option value="Wildlife & Adventure" className="bg-emerald-950 text-white">Wildlife & Adventure</option>
+                <option value="Heritage & Food Trail" className="bg-emerald-950 text-white">Heritage & Food Trail</option>
+              </select>
+            </div>
+
+            {/* Search CTA */}
+            <button
+              type="submit"
+              className="h-full min-h-[52px] w-full rounded-2xl font-bold text-emerald-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-xl shadow-amber-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base"
+            >
+              <span>Get Free Quote</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+          </form>
+        </div>
+
+        {/* Carousel indicators */}
+        <div className="flex items-center justify-center gap-2 mt-4">
+          {HERO_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentSlide(i)}
+              className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${
+                i === currentSlide ? "w-8 bg-amber-400" : "w-2 bg-white/40 hover:bg-white/70"
+              }`}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+    </div>
   );
 }
